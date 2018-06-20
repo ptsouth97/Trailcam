@@ -1,7 +1,15 @@
 #!/usr/bin/python3
 
+import matplotlib.pyplot as plt
+import pandas as pd
+
 def main():
-	lunar_plot()
+	''' main function for testing'''
+	
+	df = pd.read_csv('test.csv')
+	lunar_plot(df)
+	temp_plot(df)
+
 
 def lunar_plot(df):
 	''' Plots number of deer photographed during daylight hours by moon phase'''
