@@ -12,21 +12,17 @@ import numpy as np
 
 
 def main():
-	'''main module for unit testing'''
+	'''main function for unit testing'''
 
 	df = pd.read_csv('deer.csv')
 	df = df.assign(light=np.nan, dark=np.nan, day_deer=np.nan, day_bucks=np.nan, day_does=np.nan, day_hogs=np.nan)
-	# print(df)
 	get_sun_data_from_web(df)
     
 
 def get_sun_data_from_web(dt):
-	'''Adds columns for times of light and dark for a given date in Yemassee, SC'''
+	'''Takes dataframe and adds columns for times of light and dark for a given date in Yemassee, SC'''
 
-	# dt['obs_time'] = pd.to_datetime(dt['obs_time'])
-	# dt = dt.set_index('obs_time')
-	# print(dt)
-
+	# Loop through the dataframe and get the times for dawn, sunrise, sunset, and dusk from almanac.com
 	for i in range(0, len(dt)):    
 		date = str(dt.loc[i, 'obs_time'])
 		date = date[0:10]
@@ -51,9 +47,11 @@ def get_sun_data_from_web(dt):
 		dt.loc[j, 'dark'] = re.sub('[.]', '', dt.loc[j, 'dark'])
 		dt.loc[j, 'light'] = re.sub('[.]', '', dt.loc[j, 'light'])
 
+	# Convert times to correct datetime format
 	dt['light'] = pd.to_datetime(dt['light'], format='%Y-%m-%d %I:%M %p')
 	dt['dark'] = pd.to_datetime(dt['dark'], format='%Y-%m-%d %I:%M %p')
     
+	# Loop through the dataframe again and label animals that were observed after dawn and before dusk
 	for k in range(0, len(dt)):
 		test = (dt.loc[k, 'obs_time'] < dt.loc[k, 'dark']) & (dt.loc[k, 'obs_time'] > dt.loc[k, 'light'])
 		if test == True:
@@ -62,6 +60,7 @@ def get_sun_data_from_web(dt):
 			dt.loc[k, 'day_does'] = dt.loc[k, 'does']
 			dt.loc[k, 'day_hogs'] = dt.loc[k, 'hogs']
 
+	# Change the moon phase information to human readable form
 	dt = dt.fillna(0)
 	dt = dt.replace(to_replace='0E', value='new')
 	dt = dt.replace(to_replace='1E', value='waxing crescent')
@@ -72,7 +71,6 @@ def get_sun_data_from_web(dt):
 	dt = dt.replace(to_replace='6E', value='3rd quarter')
 	dt = dt.replace(to_replace='7E', value='waning crescent')
 
-	# print(dt)
 	dt.to_csv('updated_deer.csv', index=False)
 
 	return dt
