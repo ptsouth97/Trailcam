@@ -1,18 +1,25 @@
 #!/usr/bin/python3
 
 import matplotlib.pyplot as plt
-from PIL import Image
-from PIL.ExifTags import TAGS, GPSTAGS
 
-img = plt.imread('I__00002.JPG')
 
-print(img.shape)
+def main():
+	''' main function for testing'''
 
-plt.set_cmap('gray')
-plt.imshow(img, cmap='gray')
-#plt.axis('off')
-plt.show()
+	picture = plt.imread('I__00002.JPG')
+	plt_imshow(picture)
 
-image = Image.open('I__00002.JPG')
-info = image._getexif()
-print(info)
+
+def plt_imshow(img):
+	''' Uses matplotlib.pyplot to show a grayscale image instead of PIL'''
+
+	print(img.shape)
+
+	plt.set_cmap('gray')
+	plt.imshow(img, cmap='gray')
+	#plt.axis('off')
+	plt.show()
+
+
+if __name__ == '__main__':
+	main()
