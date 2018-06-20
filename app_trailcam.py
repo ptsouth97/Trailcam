@@ -5,7 +5,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from PIL import Image
 from PIL.ExifTags import TAGS, GPSTAGS
-import almanac_info
+import almanac_info, plot_data
 import numpy as np
 
 
@@ -71,22 +71,13 @@ def main():
 	df = df.assign(light=np.nan, dark=np.nan, day_deer=np.nan, day_bucks=np.nan, day_does=np.nan, day_hogs=np.nan)
 	df = df.reset_index(drop=True)
 	print(df)
-
+	
 	updated_df = almanac_info.get_sun_data_from_web(df)
 	print(updated_df)
 
-	lunar = updated_df.groupby('moon').day_deer.sum()
-	# print(lunar)
-	lunar.plot(kind='bar', rot=45)
-	plt.xlabel('Moon phase')
-	plt.ylabel('Number of deer photographed during daylight')
-	plt.show()
- 
-	plt.scatter(updated_df['temp'], updated_df['deer'])
-	plt.xlabel('Temp (F)')
-	plt.ylabel('Number of deer photographed')
-	plt.show()
-
+	plot_data.lunar_plot(updated_df)
+	plot_data.temp_plot(updated_df)
+	
     
 if __name__ == '__main__':
 	main()
