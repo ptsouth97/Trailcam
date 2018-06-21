@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 def main():
 	''' main function for testing'''
 
-	picture = plt.imread('I__00002.JPG')
+	picture = plt.imread('test.JPG')
 	plt_imshow(picture)
 
 
