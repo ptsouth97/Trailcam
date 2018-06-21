@@ -17,20 +17,24 @@ def main():
 	columns = ['obs_time', 'temp', 'moon', 'deer', 'bucks', 'does', 'hogs']
 	df = pd.DataFrame(columns=columns) 
 
+	# Go through each file and record how many animals are in the image
 	for file in filelist:
 
+		# create a 1 row dataframe (df_row) that will be appended to df after collecting the info
 		df_row = pd.DataFrame(columns=columns, index=range(0,1))
 
+		# open the image and resize for the user's screen
 		image = Image.open(file)
 		Resize = image.resize((960, 540))
-		Resize.show()
-		# image.load()
 
+		# Determine what animals are in the picture and record
 		record = input('Do you want to record this picture [1]=Yes [any other key]=No  ').strip()
+
 		if record != '1':
 			continue
 
 		deer = int(input('How many deer are in the picture? ').strip())
+
 		if deer > 0:
 			df_row.iloc[0][3] = deer
 
@@ -48,6 +52,7 @@ def main():
 		if hogs > 0:
 			df_row.iloc[0][6] = hogs
 
+
 		# Get exif data from image
 		info = image._getexif()
 		Resize.load()
@@ -63,6 +68,7 @@ def main():
 
 		df = df.append(df_row)
 	
+
 	df['obs_time'] = pd.to_datetime(df['obs_time'], format='%H%M:%m%d%y')
     
 	os.chdir('..')
