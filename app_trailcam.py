@@ -10,6 +10,8 @@ import numpy as np
 
 
 def main():
+	''' function goes through each image in a folder and user determines how many deer or hogs are in the picture'''
+
 	path = './deer'
 	filelist = os.listdir(path)
 	os.chdir(path)
@@ -17,7 +19,6 @@ def main():
 	columns = ['obs_time', 'temp', 'moon', 'deer', 'bucks', 'does', 'hogs']
 	df = pd.DataFrame(columns=columns) 
 
-	# Go through each file and record how many animals are in the image
 	for file in filelist:
 
 		# create a 1 row dataframe (df_row) that will be appended to df after collecting the info
@@ -26,6 +27,7 @@ def main():
 		# open the image and resize for the user's screen
 		image = Image.open(file)
 		Resize = image.resize((960, 540))
+		Resize.show()
 
 		# Determine what animals are in the picture and record
 		record = input('Do you want to record this picture [1]=Yes [any other key]=No  ').strip()
