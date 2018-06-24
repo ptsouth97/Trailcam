@@ -39,18 +39,22 @@ def get_sun_data_from_web(dt):
 		sets = rises.findNext('td')
 		dusk = sets.findNext('td')
 
-		dt.loc[i, 'light'] = date + ' ' + dawn.text
-		dt.loc[i, 'dark'] = date + ' ' + dusk.text 
-		print(dt.loc[i, 'dark'])    
+		dt.loc[i, 'light'] = date + ' ' + rises.text
+		dt.loc[i, 'dark'] = date + ' ' + sets.text 
+		# FOR TESTING: print('Sunset = {}'.format(dt.loc[i, 'dark']))    
             
 	# Replace A.M. and P.M. with AM and PM so pd.to_datetime method will work
 	for j in range(0, len(dt)):
-		dt.loc[j, 'dark'] = re.sub('[.]', '', dt.loc[j, 'dark'])
 		dt.loc[j, 'light'] = re.sub('[.]', '', dt.loc[j, 'light'])
+		dt.loc[j, 'dark'] = re.sub('[.]', '', dt.loc[j, 'dark'])
 
 	# Convert times to correct datetime format
 	dt['light'] = pd.to_datetime(dt['light'], format='%Y-%m-%d %I:%M %p')
 	dt['dark'] = pd.to_datetime(dt['dark'], format='%Y-%m-%d %I:%M %p')
+
+	# Subtract hour from sunrise and add hour to sunset to account for legal shooting times
+	dt['light'] = dt['light'] - datetime.timedelta(hours=1)
+	dt['dark'] = dt['dark'] + datetime.timedelta(hours=1)
     
 	# Loop through the dataframe again and label animals that were observed after dawn and before dusk
 	for k in range(0, len(dt)):
