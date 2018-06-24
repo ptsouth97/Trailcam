@@ -39,8 +39,9 @@ def get_sun_data_from_web(dt):
 		sets = rises.findNext('td')
 		dusk = sets.findNext('td')
 
-		dt.loc[i, 'light'] = date + dawn.text
-		dt.loc[i, 'dark'] = date + dusk.text     
+		dt.loc[i, 'light'] = date + ' ' + dawn.text
+		dt.loc[i, 'dark'] = date + ' ' + dusk.text 
+		print(dt.loc[i, 'dark'])    
             
 	# Replace A.M. and P.M. with AM and PM so pd.to_datetime method will work
 	for j in range(0, len(dt)):

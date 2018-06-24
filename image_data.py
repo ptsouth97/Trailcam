@@ -38,7 +38,9 @@ def getexif(image, d_row):
 	d_row.iloc[0][1] = temp
 	d_row.iloc[0][2] = moon
 
+	print('RAW DATA')
 	print(d_row)
+	print('')
 
 	return(d_row)	
 

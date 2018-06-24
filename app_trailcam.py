@@ -80,10 +80,14 @@ def main():
 
 	df = df.assign(light=np.nan, dark=np.nan, day_deer=np.nan, day_bucks=np.nan, day_does=np.nan, day_hogs=np.nan)
 	df = df.reset_index(drop=True)
+	print('UPDATED DF')
 	print(df)
+	print('')
 	
+	print('FINAL DF')
 	updated_df = almanac_info.get_sun_data_from_web(df)
 	print(updated_df)
+	print('')
 
 	plot_data.lunar_plot(updated_df)
 	plot_data.temp_plot(updated_df)
