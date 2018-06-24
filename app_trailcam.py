@@ -5,14 +5,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from PIL import Image
 from PIL.ExifTags import TAGS, GPSTAGS
-import almanac_info, plot_data
+import almanac_info, plot_data, image_data
 import numpy as np
 
 
 def main():
 	''' function goes through each image in a folder and user determines how many deer or hogs are in the picture'''
 
-	path = './deer'
+	path = './almanac_test'
 	filelist = os.listdir(path)
 	os.chdir(path)
 
@@ -56,7 +56,9 @@ def main():
 
 
 		# Get exif data from image
-		info = image._getexif()
+		df_row = image_data.getexif(image, df_row)
+
+		'''info = image._getexif()
 		Resize.load()
 		metadata_str = info.get(270)
 
@@ -66,7 +68,7 @@ def main():
 
 		df_row.iloc[0][0] = obs_time
 		df_row.iloc[0][1] = temp
-		df_row.iloc[0][2] = moon
+		df_row.iloc[0][2] = moon'''
 
 		df = df.append(df_row)
 	
