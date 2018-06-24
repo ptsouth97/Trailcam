@@ -11,7 +11,7 @@ def main():
 	test_file = 'IMG_0022.JPG'
 	img = Image.open(test_file)
 
-	columns = ['obs_time', 'temp', 'moon', 'deer', 'bucks', 'does', 'hogs']
+	columns = ['obs_time', 'temp', 'moon', 'deer', 'bucks', 'does', 'hogs', 'stand']
 	df = pd.DataFrame(columns=columns, index=range(0,1))	
 
 	getexif(img, df)
@@ -48,6 +48,7 @@ def getexif(image, d_row):
 	d_row.iloc[0][0] = obs_time
 	d_row.iloc[0][1] = temp
 	d_row.iloc[0][2] = moon
+	d_row.iloc[0][3] = camera
 
 	print('RAW DATA')
 	print(d_row)

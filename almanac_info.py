@@ -15,7 +15,7 @@ def main():
 	'''main function for unit testing'''
 
 	df = pd.read_csv('deer.csv')
-	df = df.assign(light=np.nan, dark=np.nan, day_deer=np.nan, day_bucks=np.nan, day_does=np.nan, day_hogs=np.nan)
+	df = df.assign(light=np.nan, dark=np.nan, day_deer=np.nan, day_bucks=np.nan, day_does=np.nan, day_hogs=np.nan, stand=np.nan)
 	get_sun_data_from_web(df)
     
 
@@ -64,6 +64,7 @@ def get_sun_data_from_web(dt):
 			dt.loc[k, 'day_bucks'] = dt.loc[k, 'bucks']
 			dt.loc[k, 'day_does'] = dt.loc[k, 'does']
 			dt.loc[k, 'day_hogs'] = dt.loc[k, 'hogs']
+			
 
 	# Change the moon phase information to human readable form
 	dt = dt.fillna(0)

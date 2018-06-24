@@ -16,7 +16,7 @@ def main():
 	filelist = os.listdir(path)
 	os.chdir(path)
 
-	columns = ['obs_time', 'temp', 'moon', 'deer', 'bucks', 'does', 'hogs']
+	columns = ['obs_time', 'temp', 'moon', 'stand', 'deer', 'bucks', 'does', 'hogs']
 	df = pd.DataFrame(columns=columns) 
 
 	for file in filelist:
@@ -38,38 +38,25 @@ def main():
 		deer = int(input('How many deer are in the picture? ').strip())
 
 		if deer > 0:
-			df_row.iloc[0][3] = deer
+			df_row.iloc[0][4] = deer
 
 			bucks = int(input('How many bucks are in the picture? ').strip())
 			if bucks > 0:
-				df_row.iloc[0][4] = bucks
+				df_row.iloc[0][5] = bucks
 
 			does = deer - bucks
 
 			if does > 0:
-				df_row.iloc[0][5] = does
+				df_row.iloc[0][6] = does
 
 		hogs = int(input('How many hogs are in the picture? ').strip())
 
 		if hogs > 0:
-			df_row.iloc[0][6] = hogs
+			df_row.iloc[0][7] = hogs
 
 
 		# Get exif data from image
 		df_row = image_data.getexif(image, df_row)
-
-		'''info = image._getexif()
-		Resize.load()
-		metadata_str = info.get(270)
-
-		obs_time = metadata_str[0:11]
-		temp = metadata_str[12:14]
-		moon = metadata_str[29:31]
-
-		df_row.iloc[0][0] = obs_time
-		df_row.iloc[0][1] = temp
-		df_row.iloc[0][2] = moon'''
-
 		df = df.append(df_row)
 	
 
