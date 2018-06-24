@@ -49,9 +49,8 @@ def main():
 			if does > 0:
 				df_row.iloc[0][6] = does
 
-		hogs = int(input('How many hogs are in the picture? ').strip())
-
-		if hogs > 0:
+		else:
+			hogs = int(input('How many hogs are in the picture? ').strip())
 			df_row.iloc[0][7] = hogs
 
 
