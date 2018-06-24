@@ -34,5 +34,17 @@ def temp_plot(df):
 	return
 
 
+def stand_plot(df):
+	''' Plots number of deer photographed by stand'''
+
+	location = df.groupby('stand').deer.sum()
+	location.plot(kind='bar', rot=45)
+	plt.xlabel('Stand')
+	plt.ylabel('Number of deer photographed')
+	plt.show()
+
+	return
+
+
 if __name__ == '__main__':
 	main()

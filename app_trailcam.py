@@ -78,7 +78,8 @@ def main():
 
 	plot_data.lunar_plot(updated_df)
 	plot_data.temp_plot(updated_df)
-	
+	plot_data.stand_plot(updated_df)	
+
     
 if __name__ == '__main__':
 	main()
