@@ -7,6 +7,7 @@ from PIL import Image
 from PIL.ExifTags import TAGS, GPSTAGS
 import almanac_info, plot_data, image_data
 import numpy as np
+import sql
 
 
 def main():
@@ -83,6 +84,9 @@ def main():
 	plot_data.lunar_plot(updated_df)
 	plot_data.temp_plot(updated_df)
 	plot_data.stand_plot(updated_df)	
+
+	# add this .csv to sqlite database
+	sql.load_csv(name)
 
     
 if __name__ == '__main__':

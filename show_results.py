@@ -29,10 +29,6 @@ def main():
 	df = pd.DataFrame(results, columns=columns)
 	df = df.apply(pd.to_numeric, errors='ignore')
 
-	# df = df.convert_objects(convert_numeric=True)
-	# df = df.drop(['old_index'], axis=1)
-	# print(df.loc[:, 'day_deer'])
-
 	plot_data.lunar_plot(df)
 	plot_data.temp_plot(df)
 	plot_data.stand_plot(df)
