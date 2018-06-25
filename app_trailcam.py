@@ -65,8 +65,7 @@ def main():
 	# os.chdir('..')
 	os.chdir('../..')
 	name = folder + '.csv'
-	df.to_csv(name, index=False)
-
+	
 	df = df.assign(light=np.nan, dark=np.nan, day_deer=np.nan, day_bucks=np.nan, day_does=np.nan, day_hogs=np.nan)
 	df = df.reset_index(drop=True)
 
@@ -76,6 +75,7 @@ def main():
 	# print('')
 	
 	updated_df = almanac_info.get_sun_data_from_web(df)
+	updated_df.to_csv(name, index=False)
 	# print('FINAL DF')
 	# print(updated_df)
 	# print('')

@@ -17,7 +17,7 @@ def load_csv(engine):
 	name = input('What file do you want to add to the database? ').lstrip()
 	csv_file = pd.read_csv(name)
 
-	csv_file.to_sql(name='deer', if_exists='append', con=engine)
+	csv_file.to_sql(name='game', if_exists='append', con=engine)
 
 	# connection = engine.connect()
 
@@ -28,7 +28,7 @@ def show_results(engine):
 	# print(engine.table_names())
 
 	metadata = MetaData(engine)
-	deer = Table('deer', metadata, autoload=True, autoload_with=engine)
+	game = Table('game', metadata, autoload=True, autoload_with=engine)
 
 	# print(repr(deer))
 
@@ -36,9 +36,9 @@ def show_results(engine):
 	
 	# stmt = 'SELECT * FROM deer'
 	
-	stmt = select([deer])
+	stmt = select([game])
 
-	stmt = stmt.where(deer.columns.deer > 0)
+	stmt = stmt.where(game.columns.deer > 0)
 
 	result_proxy = connection.execute(stmt)
 	results = result_proxy.fetchall()

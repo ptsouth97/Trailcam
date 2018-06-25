@@ -16,7 +16,6 @@ def lunar_plot(df):
 	''' Plots number of deer photographed during daylight hours by moon phase'''
 
 	lunar = df.groupby('moon').day_deer.sum()
-	# print(lunar)
 	lunar.plot(kind='bar', rot=45)
 	plt.xlabel('Moon phase')
 	plt.ylabel('Number of deer photographed during daylight')
