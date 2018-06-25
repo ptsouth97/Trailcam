@@ -75,8 +75,8 @@ def main():
 	# print(df)
 	# print('')
 	
+	updated_df = almanac_info.get_sun_data_from_web(df)
 	# print('FINAL DF')
-	# updated_df = almanac_info.get_sun_data_from_web(df)
 	# print(updated_df)
 	# print('')
 
