@@ -8,13 +8,14 @@ def main():
 	''' connect to sqlite database'''
 
 	eng = create_engine('sqlite:///database.sqlite')
-	show_results(eng)
+	load_csv(eng)
 
 
 def load_csv(engine):
 	''' loads the csv file into the database'''
 
-	csv_file = pd.read_csv('2018-06-16 to 2018-06-21.csv')
+	name = input('What file do you want to add to the database? ').lstrip()
+	csv_file = pd.read_csv(name)
 
 	csv_file.to_sql(name='deer', if_exists='append', con=engine)
 
