@@ -12,7 +12,8 @@ import numpy as np
 def main():
 	''' function goes through each image in a folder and user determines how many deer or hogs are in the picture'''
 
-	path = './almanac_test'
+	folder = input('What is the name of the folder to be analyzed? ').lstrip()
+	path = './deer/' + folder
 	filelist = os.listdir(path)
 	os.chdir(path)
 
@@ -61,8 +62,10 @@ def main():
 
 	df['obs_time'] = pd.to_datetime(df['obs_time'], format='%H%M:%m%d%y')
     
-	os.chdir('..')
-	df.to_csv('deer.csv', index=False)
+	# os.chdir('..')
+	os.chdir('../..')
+	name = folder + '.csv'
+	df.to_csv(name, index=False)
 
 	df = df.assign(light=np.nan, dark=np.nan, day_deer=np.nan, day_bucks=np.nan, day_does=np.nan, day_hogs=np.nan)
 	df = df.reset_index(drop=True)
