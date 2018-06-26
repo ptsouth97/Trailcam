@@ -52,6 +52,7 @@ def show_all(df):
 	plt.ylabel('Number of deer')
 	plt.title('Legal shooting deer by stand')
 	plt.tight_layout()
+	plt.savefig('Bampfield Stats.png')
 
 	plt.show()
 
