@@ -29,9 +29,10 @@ def main():
 	df = pd.DataFrame(results, columns=columns)
 	df = df.apply(pd.to_numeric, errors='ignore')
 
-	plot_data.lunar_plot(df)
+	plot_data.show_all(df)
+	'''plot_data.lunar_plot(df)
 	plot_data.temp_plot(df)
-	plot_data.stand_plot(df)
+	plot_data.stand_plot(df)'''
 
 	# for result in results:
 	#	print(result.obs_time, result.stand, result.deer)
