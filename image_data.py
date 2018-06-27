@@ -9,15 +9,19 @@ def main():
 	''' main function for testing purposes'''
 
 	test_file = 'I__00159.JPG'
-	img = Image.open(test_file)
+	
+	with Image.open(test_file) as img:
+		Resize = img.resize((960, 540))
+		Resize.show()
 
-	Resize = img.resize((960, 540))
-	# Resize.show()
+		answer = input('What do you think? ')
 
-	columns = ['obs_time', 'temp', 'moon', 'stand', 'deer', 'bucks', 'does', 'hogs']
+	# Resize.close()
+
+	'''columns = ['obs_time', 'temp', 'moon', 'stand', 'deer', 'bucks', 'does', 'hogs']
 	df = pd.DataFrame(columns=columns, index=range(0,1))	
 
-	getexif(img, df)
+	getexif(img, df)'''
 
 
 def getexif(image, d_row):

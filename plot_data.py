@@ -3,6 +3,8 @@
 import matplotlib.pyplot as plt
 from matplotlib.ticker import ScalarFormatter, FormatStrFormatter
 import pandas as pd
+import seaborn as sns
+
 
 def main():
 	''' main function for testing'''
@@ -27,7 +29,8 @@ def show_all(df):
 
 	# Temperature
 	plt.subplot(222)
-	plt.scatter(df['temp'], df['deer'], color='red')
+	# plt.scatter(df['temp'], df['deer'], color='red')
+	plt.hist(df['temp'], bins=10)
 	plt.xlabel('Temp (F)')
 	plt.ylabel('Number of deer')
 	plt.ticklabel_format(useOffset=False)
@@ -37,8 +40,10 @@ def show_all(df):
 
 	# Total Deer by Stand
 	plt.subplot(223)
-	location = df.groupby('stand').deer.sum()
-	location.plot(kind='bar', rot=45, color='orange')
+	#location = df.groupby('stand').deer.sum()
+	#location.plot(kind='bar', rot=45, color='orange')
+	
+	sns.boxplot(x='stand', y='deer', data=df)
 	plt.xlabel('Stand')
 	plt.ylabel('Number of deer')
 	plt.title('Total deer by stand')
@@ -46,14 +51,22 @@ def show_all(df):
 
 	# Day Deer by Stand
 	plt.subplot(224)
-	loc = df.groupby('stand').day_deer.sum()
-	loc.plot(kind='bar', rot=45)
+	# loc = df.groupby('stand').day_deer.sum()
+	# loc.plot(kind='bar', rot=45)
+
+	sns.violinplot(x='stand', y='day_deer', data=df)
 	plt.xlabel('Stand')
 	plt.ylabel('Number of deer')
 	plt.title('Legal shooting deer by stand')
 	plt.tight_layout()
 	plt.savefig('Bampfield Stats.png')
 
+	plt.show()
+
+	# Heatmap
+	num_df = df._get_numeric_data()
+	sns.heatmap(num_df, linewidth=0.5, cmap='Blues_r')
+	plt.title('Covariance plot')
 	plt.show()
 
 
