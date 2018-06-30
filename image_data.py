@@ -8,7 +8,7 @@ from PIL.ExifTags import TAGS, GPSTAGS
 def main():
 	''' main function for testing purposes'''
 
-	test_file = 'IMG_0022.JPG'
+	test_file = 'I__00159.JPG'
 	
 	'''with Image.open(test_file) as img:
 		Resize = img.resize((960, 540))
@@ -39,24 +39,11 @@ def getexif(image, d_row):
 	# check the list of values to see which camera is being used then send to appropriate function
 	if 'CUDDEBACK' in values:
 		print('The camera is Cuddeback')
+		obs_time, temp, camera, moon = cuddeback_exif(image_info)
 
 	elif 'BROWNING' in values:
 		print('The camera is Browning')
-		obs_time, temp_with_units, temp, camera, moon_info, moon = browning_exif(image_info)
-
-	
-
-	'''metadata_str = info.get(270)
-	
-	# Split the string on the colons to make a list
-	metadata_list = metadata_str.split(':')
-		
-	obs_time = metadata_list[0] + ':' + metadata_list[1]
-	temp_with_units = metadata_list[2]
-	temp = temp_with_units[:-1]
-	camera = metadata_list[4]
-	moon_info = metadata_list[5]	
-	moon = moon_info[0:2]'''
+		obs_time, temp, camera, moon = browning_exif(image_info)
 
 	d_row.iloc[0][0] = obs_time
 	d_row.iloc[0][1] = temp
@@ -73,7 +60,7 @@ def getexif(image, d_row):
 
 
 def browning_exif(info):
-	''' get exif data for browning camera'''
+	''' get exif data for Browning camera'''
 
 	metadata_str = info.get(270)
 
@@ -87,7 +74,20 @@ def browning_exif(info):
 	mn_info = metadata_list[5]
 	mn = mn_info[0:2]
 
-	return(time, tmp_units, tmp, cam, mn_info, mn)
+	return(time, tmp, cam, mn)
+
+
+def cuddeback_exif(info):
+	''' get exif data for Cuddeback camera'''
+
+	print(info)
+
+	time = info[306]
+	tmp = '50'
+	cam = 'CUDDEBACK'
+	mn = '1E'
+
+	return(time, tmp, cam, mn)
 		
 
 if __name__ == '__main__':
