@@ -10,18 +10,20 @@ def main():
 
 	test_file = 'I__00159.JPG'
 	
-	with Image.open(test_file) as img:
+	'''with Image.open(test_file) as img:
 		Resize = img.resize((960, 540))
 		Resize.show()
 
-		answer = input('What do you think? ')
+		answer = input('What do you think? ')'''
+
+	img = Image.open(test_file)
 
 	# Resize.close()
 
-	'''columns = ['obs_time', 'temp', 'moon', 'stand', 'deer', 'bucks', 'does', 'hogs']
-	df = pd.DataFrame(columns=columns, index=range(0,1))	
+	columns = ['obs_time', 'temp', 'moon', 'stand', 'deer', 'bucks', 'does', 'hogs']
+	df = pd.DataFrame(columns=columns, index=range(0,1))
 
-	getexif(img, df)'''
+	getexif(img, df)
 
 
 def getexif(image, d_row):
@@ -31,9 +33,16 @@ def getexif(image, d_row):
 	image.load()
 
 	# CUDDEBACK
-	# print(type(info))
-	# metadata_str = info.get(306)
-	# print(metadata_str)
+	values = info.values()
+	print(values)
+	if 'CUDDEBACK' in values:
+		print('It is there')
+
+	else:
+		print('It is not there')
+
+	metadata_str = info.get(271)
+	print('The camera is ' + metadata_str)
 
 	'''metadata_str = info.get(270)
 	
