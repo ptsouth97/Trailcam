@@ -31,9 +31,9 @@ def getexif(image, d_row):
 	image.load()
 
 	# CUDDEBACK
-	print(type(info))
-	metadata_str = info.get(306)
-	print(metadata_str)
+	# print(type(info))
+	# metadata_str = info.get(306)
+	# print(metadata_str)
 
 	'''metadata_str = info.get(270)
 	
