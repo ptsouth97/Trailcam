@@ -35,6 +35,7 @@ def main():
 		record = input('Do you want to record this picture [1]=Yes [any other key]=No  ').strip()
 
 		if record != '1':
+			os.remove(file)
 			continue
 
 		deer = int(input('How many deer are in the picture? ').strip())
