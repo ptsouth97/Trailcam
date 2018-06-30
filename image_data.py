@@ -8,7 +8,7 @@ from PIL.ExifTags import TAGS, GPSTAGS
 def main():
 	''' main function for testing purposes'''
 
-	test_file = 'I__00159.JPG'
+	test_file = 'IMG_0022.JPG'
 	
 	'''with Image.open(test_file) as img:
 		Resize = img.resize((960, 540))
@@ -29,20 +29,21 @@ def main():
 def getexif(image, d_row):
 	''' extracts metadata from image and places in a dataframe row that gets appended to the main dataframe in the app'''
 
+	# create a dictionary with the image exif data
 	info = image._getexif()
 	image.load()
 
-	# CUDDEBACK
+	# get a list of the values from the dictionary
 	values = info.values()
-	print(values)
-	if 'CUDDEBACK' in values:
-		print('It is there')
 
-	else:
-		print('It is not there')
+	# check the list of values to see which camera is being used
+	if 'CUDDEBACK' in values:
+		print('The camera is Cuddeback')
+
+	elif 'BROWNING' in values:
+		print('The camera is Browning')
 
 	metadata_str = info.get(271)
-	print('The camera is ' + metadata_str)
 
 	'''metadata_str = info.get(270)
 	
