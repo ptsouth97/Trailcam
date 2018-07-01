@@ -8,7 +8,11 @@ from keras.models import Sequential
 def main():
 	''' main function for testing purposes'''
 
-	model(A, b)
+	# Use MNIST dataset:  http://yann.lecun.com/exdb/mnist/
+	# 28 x 28 grid flattened to 784 values for each image (flattened to 784 by 1 array)
+	# only use 2,500 images rather than 60,000
+
+	model(feature_array, response_variable)
 
 
 def model(X, y):
