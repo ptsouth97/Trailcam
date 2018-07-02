@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 
-import keras
 from keras.layers import Dense
 from keras.models import Sequential
+from tensorflow.examples.tutorials.mnist import input_data
+# import sys
 
 
 def main():
@@ -12,7 +13,16 @@ def main():
 	# 28 x 28 grid flattened to 784 values for each image (flattened to 784 by 1 array)
 	# only use 2,500 images rather than 60,000
 
-	model(feature_array, response_variable)
+	mnist = input_data.read_data_sets("MNIST_data", one_hot=True)
+	mnist.display(images[0])
+
+	images = mnist.train.images
+	images = images[0:2500]
+	
+	labels = mnist.train.labels
+	labels = labels[0:2500]
+
+	model(images, labels)
 
 
 def model(X, y):
