@@ -8,7 +8,7 @@ import numpy as np
 def main():
 	''' main function for testing'''
 
-	pic = 'test_image.JPG'
+	pic = 'colormap_test.png'
 	plt_imshow(pic)
 
 
@@ -17,10 +17,14 @@ def plt_imshow(picture):
 
 	fig = plt.figure()
 	img = mpimg.imread(picture)
-	plt.imshow(img)
+	plt.imshow(img, cmap='hot')
+	plt.set_cmap('hot')
+	plt.colorbar()
 	plt.show(block=False)
 	
-	# plt.close('all')
+	if __name__ == '__main__':
+		pause = input('Ready? ')
+		plt.close('all')
 
 	return fig
 
