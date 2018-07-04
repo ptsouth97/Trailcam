@@ -28,7 +28,7 @@ def main():
 
 		# open the image and resize for the user's screen
 		# REPLACING WITH MATPLOTLIB.IMAGE
-		imshow.plt_imshow(file)
+		fig = imshow.plt_imshow(file)
 
 		'''image = Image.open(file)
 		Resize = image.resize((960, 540))
@@ -38,6 +38,7 @@ def main():
 		record = input('Do you want to record this picture [1]=Yes [any other key]=No  ').strip()
 
 		if record != '1':
+			plt.close(fig)
 			os.remove(file)
 			continue
 
@@ -59,6 +60,8 @@ def main():
 			hogs = int(input('How many hogs are in the picture? ').strip())
 			df_row.iloc[0][7] = hogs
 
+		# Close the image
+		plt.close(fig)
 
 		# Get exif data from image
 		image = Image.open(file)

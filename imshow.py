@@ -15,13 +15,14 @@ def main():
 def plt_imshow(picture):
 	''' Uses matplotlib.pyplot to show a grayscale image instead of PIL'''
 
+	fig = plt.figure()
 	img = mpimg.imread(picture)
 	plt.imshow(img)
 	plt.show(block=False)
-	ans = input('What do you think? ')
-	plt.close('all')
+	
+	# plt.close('all')
 
-	return
+	return fig
 
 
 if __name__ == '__main__':
