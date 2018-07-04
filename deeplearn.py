@@ -14,15 +14,15 @@ def main():
 	# only use 2,500 images rather than 60,000
 
 	mnist = input_data.read_data_sets("MNIST_data", one_hot=True)
-	mnist.display(images[0])
 
 	images = mnist.train.images
 	images = images[0:2500]
 	
 	labels = mnist.train.labels
 	labels = labels[0:2500]
+	print(labels[1])
 
-	model(images, labels)
+	# model(images, labels)
 
 
 def model(X, y):

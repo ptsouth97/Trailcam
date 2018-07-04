@@ -30,7 +30,7 @@ def main():
 		image = Image.open(file)
 		Resize = image.resize((960, 540))
 		Resize.show()
-
+		
 		# Determine what animals are in the picture and record
 		record = input('Do you want to record this picture [1]=Yes [any other key]=No  ').strip()
 
