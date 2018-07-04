@@ -5,7 +5,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from PIL import Image
 from PIL.ExifTags import TAGS, GPSTAGS
-import almanac_info, plot_data, image_data
+import almanac_info, plot_data, image_data, imshow
 import numpy as np
 import sql
 
@@ -27,9 +27,12 @@ def main():
 		df_row = pd.DataFrame(columns=columns, index=range(0,1))
 
 		# open the image and resize for the user's screen
-		image = Image.open(file)
+		# REPLACING WITH MATPLOTLIB.IMAGE
+		imshow.plt_imshow(file)
+
+		'''image = Image.open(file)
 		Resize = image.resize((960, 540))
-		Resize.show()
+		Resize.show()'''
 		
 		# Determine what animals are in the picture and record
 		record = input('Do you want to record this picture [1]=Yes [any other key]=No  ').strip()
@@ -58,8 +61,10 @@ def main():
 
 
 		# Get exif data from image
+		image = Image.open(file)
 		df_row = image_data.getexif(image, df_row)
 		df = df.append(df_row)
+		image.close()
 	
 
 	df['obs_time'] = pd.to_datetime(df['obs_time'], format='%H%M:%m%d%y')

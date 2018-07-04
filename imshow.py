@@ -21,6 +21,8 @@ def plt_imshow(picture):
 	ans = input('What do you think? ')
 	plt.close('all')
 
+	return
+
 
 if __name__ == '__main__':
 	main()
