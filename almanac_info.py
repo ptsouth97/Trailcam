@@ -107,20 +107,23 @@ def get_moon_data_from_web(year_month):
 	for i in range(0, DoM+4):
 		day = day.findNext('td')
 
-	print(day)
+	# print(day)
 	# THIS IS WHAT 'day' looks like
 	# <td class="calday"><p class="daynumber">3</p><div class="moongraphic"><img alt="Moon Phase" src="https://almanac.s3.amazonaws.com/moon/images/m240.jpg"/><br/></div><p class="phasename nonphase">75%<br/>20 days</p></td>
 
 	
 	moonphase_raw = day.find('p', {'class': 'phasename nonphase'})
-	print(moonphase_raw)
+	# print(moonphase_raw)
 	
 	# THIS IS WHAT 'moonphase' LOOKS LIKE:
 	# <p class="phasename nonphase">75%<br/>20 days</p>
 
 	if moonphase_raw == None:
-		print('Gotta fix this')
-		moonphase = 0
+		phase_name = day.find('p', {'class': 'phasename'})
+		phase_name_text = phase_name.text
+		phase_name_split = phase_name_text.split(' ')
+		moonphase = phase_name_split[0]
+		print(moonphase)
 
 	else:
 		moonphase_text = moonphase_raw.text
