@@ -17,7 +17,7 @@ def main():
 	#df = pd.read_csv('deer.csv')
 	#df = df.assign(light=np.nan, dark=np.nan, day_deer=np.nan, day_bucks=np.nan, day_does=np.nan, day_hogs=np.nan, stand=np.nan)
 	#get_sun_data_from_web(df)
-	get_moon_data_from_web('2018-07')
+	get_moon_data_from_web('2018:06:17 21:50:03')
     
 
 def get_sun_data_from_web(dt):
@@ -86,8 +86,11 @@ def get_sun_data_from_web(dt):
 def get_moon_data_from_web(year_month):
 	''' takes a date and returns the moon phase'''
 
+	year_month_list = year_month.split(':')
+	year_month_format = year_month_list[0] + '-' + year_month_list[1]
+
 	base = 'https://www.almanac.com/astronomy/moon/calendar/SC/Yemassee/'
-	url = base + year_month
+	url = base + year_month_format
 	print('The url is ' + url)
 	r = requests.get(url)
 	html_doc = r.text
@@ -97,9 +100,10 @@ def get_moon_data_from_web(year_month):
 	
 	day = table.findNext('td')	
 
-	for i in range(0, 2):
+	for i in range(0, 18):
 		day = day.findNext('td')
 
+	print(day)
 	# THIS IS WHAT 'day' looks like
 	# <td class="calday"><p class="daynumber">3</p><div class="moongraphic"><img alt="Moon Phase" src="https://almanac.s3.amazonaws.com/moon/images/m240.jpg"/><br/></div><p class="phasename nonphase">75%<br/>20 days</p></td>
 

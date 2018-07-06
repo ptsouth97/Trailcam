@@ -56,6 +56,8 @@ def getexif(image, d_row):
 		print(d_row)
 		print('')
 
+		get_moon_data_from_web(obs_time)
+
 	return(d_row)	
 
 
