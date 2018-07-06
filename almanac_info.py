@@ -92,7 +92,28 @@ def get_moon_data_from_web(year_month):
 	r = requests.get(url)
 	html_doc = r.text
 	soup = BeautifulSoup(html_doc, 'lxml')
-	print(soup)
+
+	table = soup.find('table', {'id': 'moon_calendar'})
+	
+	day = table.findNext('td')	
+
+	for i in range(0, 2):
+		day = day.findNext('td')
+
+	# THIS IS WHAT 'day' looks like
+	# <td class="calday"><p class="daynumber">3</p><div class="moongraphic"><img alt="Moon Phase" src="https://almanac.s3.amazonaws.com/moon/images/m240.jpg"/><br/></div><p class="phasename nonphase">75%<br/>20 days</p></td>
+
+
+	moonphase_raw = day.find('p', {'class': 'phasename nonphase'})
+	
+	# THIS IS WHAT 'moonphase' LOOKS LIKE:
+	# <p class="phasename nonphase">75%<br/>20 days</p>
+
+	moonphase_text = moonphase_raw.text
+	moonphase_split = moonphase_text.split('%')
+	moonphase = moonphase_split[0]
+
+	print(moonphase)
 
 	return
 
