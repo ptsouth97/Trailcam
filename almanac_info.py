@@ -14,9 +14,10 @@ import numpy as np
 def main():
 	'''main function for unit testing'''
 
-	df = pd.read_csv('deer.csv')
-	df = df.assign(light=np.nan, dark=np.nan, day_deer=np.nan, day_bucks=np.nan, day_does=np.nan, day_hogs=np.nan, stand=np.nan)
-	get_sun_data_from_web(df)
+	#df = pd.read_csv('deer.csv')
+	#df = df.assign(light=np.nan, dark=np.nan, day_deer=np.nan, day_bucks=np.nan, day_does=np.nan, day_hogs=np.nan, stand=np.nan)
+	#get_sun_data_from_web(df)
+	get_moon_data_from_web('2018-07')
     
 
 def get_sun_data_from_web(dt):
@@ -80,6 +81,20 @@ def get_sun_data_from_web(dt):
 	dt.to_csv('updated_deer.csv', index=False)
 
 	return dt
+
+
+def get_moon_data_from_web(yyyy-mm):
+	''' takes a date and returns the moon phase'''
+
+	base = 'https://www.almanac.com/astronomy/rise/SC/Yemassee/'
+	url = base + yyyy-mm
+	print('The url is ' + url)
+	r = requests.get(url)
+	html_doc = r.text
+	soup = BeautifulSoup(html_doc, 'lxml')
+	print(soup)
+
+	return
 
 
 if __name__ == '__main__':
