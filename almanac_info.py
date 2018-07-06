@@ -102,13 +102,13 @@ def get_moon_data_from_web(year_month):
 	table = soup.find('table', {'id': 'moon_calendar'})
 
 	day = table.findNext('td')
-	day = day.findNext('td')
-	day = day.findNext('td')
-	day = day.findNext('td')	
-	day = day.findNext('td')
-	print(day)
+	#day = day.findNext('td')
+	#day = day.findNext('td')
+	#day = day.findNext('td')	
+	#day = day.findNext('td')
+	#print(day)
 
-	for i in range(0, DoM):
+	for i in range(0, DoM+4):
 		day = day.findNext('td')
 
 	print(day)
