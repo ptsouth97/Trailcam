@@ -17,7 +17,7 @@ def main():
 	#df = pd.read_csv('deer.csv')
 	#df = df.assign(light=np.nan, dark=np.nan, day_deer=np.nan, day_bucks=np.nan, day_does=np.nan, day_hogs=np.nan, stand=np.nan)
 	#get_sun_data_from_web(df)
-	get_moon_data_from_web('2018:06:17 21:50:03')
+	get_moon_data_from_web('2018:06:26 21:50:03')
     
 
 def get_sun_data_from_web(dt):
@@ -88,6 +88,9 @@ def get_moon_data_from_web(year_month):
 
 	year_month_list = year_month.split(':')
 	year_month_format = year_month_list[0] + '-' + year_month_list[1]
+	day_time = year_month_list[2].split(' ')
+	DoM = int(day_time[0])
+	print('The day is ' + str(DoM))
 
 	base = 'https://www.almanac.com/astronomy/moon/calendar/SC/Yemassee/'
 	url = base + year_month_format
@@ -97,10 +100,15 @@ def get_moon_data_from_web(year_month):
 	soup = BeautifulSoup(html_doc, 'lxml')
 
 	table = soup.find('table', {'id': 'moon_calendar'})
-	
-	day = table.findNext('td')	
 
-	for i in range(0, 18):
+	day = table.findNext('td')
+	day = day.findNext('td')
+	day = day.findNext('td')
+	day = day.findNext('td')	
+	day = day.findNext('td')
+	print(day)
+
+	for i in range(0, DoM):
 		day = day.findNext('td')
 
 	print(day)
@@ -117,7 +125,7 @@ def get_moon_data_from_web(year_month):
 	moonphase_split = moonphase_text.split('%')
 	moonphase = moonphase_split[0]
 
-	print(moonphase)
+	print('The percent illumination is: ' + moonphase)
 
 	return
 
