@@ -3,6 +3,7 @@
 import pandas as pd
 from PIL import Image
 from PIL.ExifTags import TAGS, GPSTAGS
+import almanac_info
 
 
 def main():
@@ -56,8 +57,6 @@ def getexif(image, d_row):
 		print(d_row)
 		print('')
 
-		get_moon_data_from_web(obs_time)
-
 	return(d_row)	
 
 
@@ -87,7 +86,7 @@ def cuddeback_exif(info):
 	time = info[306]
 	tmp = '50'
 	cam = 'CUDDEBACK'
-	mn = '1E'
+	mn = almanac_info.get_moon_data_from_web(time)
 
 	return(time, tmp, cam, mn)
 		
