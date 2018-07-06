@@ -83,11 +83,11 @@ def get_sun_data_from_web(dt):
 	return dt
 
 
-def get_moon_data_from_web(yyyy-mm):
+def get_moon_data_from_web(year_month):
 	''' takes a date and returns the moon phase'''
 
-	base = 'https://www.almanac.com/astronomy/rise/SC/Yemassee/'
-	url = base + yyyy-mm
+	base = 'https://www.almanac.com/astronomy/moon/calendar/SC/Yemassee/'
+	url = base + year_month
 	print('The url is ' + url)
 	r = requests.get(url)
 	html_doc = r.text
