@@ -17,7 +17,7 @@ def main():
 	#df = pd.read_csv('deer.csv')
 	#df = df.assign(light=np.nan, dark=np.nan, day_deer=np.nan, day_bucks=np.nan, day_does=np.nan, day_hogs=np.nan, stand=np.nan)
 	#get_sun_data_from_web(df)
-	get_moon_data_from_web('2018:06:26 21:50:03')
+	get_moon_data_from_web('2018:06:06 21:50:03')
     
 
 def get_sun_data_from_web(dt):
@@ -111,15 +111,21 @@ def get_moon_data_from_web(year_month):
 	# THIS IS WHAT 'day' looks like
 	# <td class="calday"><p class="daynumber">3</p><div class="moongraphic"><img alt="Moon Phase" src="https://almanac.s3.amazonaws.com/moon/images/m240.jpg"/><br/></div><p class="phasename nonphase">75%<br/>20 days</p></td>
 
-
+	
 	moonphase_raw = day.find('p', {'class': 'phasename nonphase'})
+	print(moonphase_raw)
 	
 	# THIS IS WHAT 'moonphase' LOOKS LIKE:
 	# <p class="phasename nonphase">75%<br/>20 days</p>
 
-	moonphase_text = moonphase_raw.text
-	moonphase_split = moonphase_text.split('%')
-	moonphase = moonphase_split[0]
+	if moonphase_raw == None:
+		print('Gotta fix this')
+		moonphase = 0
+
+	else:
+		moonphase_text = moonphase_raw.text
+		moonphase_split = moonphase_text.split('%')
+		moonphase = moonphase_split[0]
 
 	# print('The percent illumination is: ' + moonphase)
 
