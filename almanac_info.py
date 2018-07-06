@@ -102,12 +102,8 @@ def get_moon_data_from_web(year_month):
 	table = soup.find('table', {'id': 'moon_calendar'})
 
 	day = table.findNext('td')
-	#day = day.findNext('td')
-	#day = day.findNext('td')
-	#day = day.findNext('td')	
-	#day = day.findNext('td')
-	#print(day)
 
+	# loop through td tags in the table to get to the day...4 compensates for empty tags at the beginning of the table
 	for i in range(0, DoM+4):
 		day = day.findNext('td')
 
