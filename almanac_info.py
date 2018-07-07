@@ -17,7 +17,8 @@ def main():
 	#df = pd.read_csv('deer.csv')
 	#df = df.assign(light=np.nan, dark=np.nan, day_deer=np.nan, day_bucks=np.nan, day_does=np.nan, day_hogs=np.nan, stand=np.nan)
 	#get_sun_data_from_web(df)
-	get_moon_data_from_web('2018:06:12 21:50:03')
+	#get_moon_data_from_web('2018:06:20 21:50:03')
+	get_temp_from_web()
     
 
 def get_sun_data_from_web(dt):
@@ -33,7 +34,7 @@ def get_sun_data_from_web(dt):
 		r = requests.get(url)
 		html_doc = r.text
 		soup = BeautifulSoup(html_doc, 'lxml')
-		print(soup.prettify())
+		# print(soup.prettify())
 
 		table = soup.find('table', {'class': 'rise_results'})
 		dawn = table.findNext('td')
@@ -129,6 +130,25 @@ def get_moon_data_from_web(date):
 	print(moonphase)
 
 	return moonphase
+
+
+def get_temp_from_web():
+	''' gets temperature for a given datetime from wunderground.com'''
+	
+	date_str = '2018-06-06'
+	base = 'https://www.almanac.com/weather/history/SC/Yemassee/'
+	url = base + date_str
+
+	r = requests.get(url)
+	html_doc = r.text
+	soup = BeautifulSoup(html_doc, 'lxml')
+	table = soup.find('table', {'class', 'weatherhistory_results'})
+	min_temp = table.findNext('span')
+	units = min_temp.findNext('span')
+	temp = units.findNext('span').text
+	print(temp)
+
+	return temp
 
 
 if __name__ == '__main__':
