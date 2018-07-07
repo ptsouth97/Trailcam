@@ -106,66 +106,10 @@ def get_moon_data_from_web(date):
 	divided = str(split[1])
 	phase = divided[0:8]
 	print(phase)
-	
-
-	'''year_month_list = year_month.split(':')
-	year_month_format = year_month_list[0] + '-' + year_month_list[1]
-	day_time = year_month_list[2].split(' ')
-	DoM = int(day_time[0])
-	# print('The day is ' + str(DoM))
-
-	base = 'https://www.almanac.com/astronomy/moon/calendar/SC/Yemassee/'
-	url = base + year_month_format
-	print('The url is ' + url)
-	ir = requests.get(url)
-	html_doc = r.text
-	soup = BeautifulSoup(html_doc, 'lxml')
-
-	table = soup.find('table', {'id': 'moon_calendar'})
-
-	day = table.findNext('td')
-
-	# loop through td tags in the table to get to the day...4 compensates for empty tags at the beginning of the table
-	for i in range(0, DoM+4):
-		day = day.findNext('td')
-
-	print(day)
-	# THIS IS WHAT 'day' looks like
-	# <td class="calday"><p class="daynumber">3</p><div class="moongraphic"><img alt="Moon Phase" src="https://almanac.s3.amazonaws.com/moon/images/m240.jpg"/><br/></div><p class="phasename nonphase">75%<br/>20 days</p></td>
 
 	
-	moonphase_raw = day.find('p', {'class': 'phasename nonphase'})
-	# print(moonphase_raw)
-	
-	# THIS IS WHAT 'moonphase' LOOKS LIKE:
-	# <p class="phasename nonphase">75%<br/>20 days</p>
 
-	if moonphase_raw == None:
-		phase_name = day.find('p', {'class': 'phasename'})
-		phase_name_text = phase_name.text
-		phase_name_split = phase_name_text.split(' ')
-		moonphase_name = phase_name_split[0]
-
-		if moonphase_name == 'New':
-			moonphase = '0'
-
-		elif moonphase_name == 'First':
-			moonphase = '50'
-
-		elif moonphase_name == 'Last':
-			moonphase = '50'
-
-		elif moonphase_name == 'Full':
-			moonphase = '100'	
-		
-	else:
-		moonphase_text = moonphase_raw.text
-		moonphase_split = moonphase_text.split('%')
-		moonphase = moonphase_split[0]
-
-	print(moonphase)'''
-
-#	return moonphase
+	return moonphase
 
 
 if __name__ == '__main__':
