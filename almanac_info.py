@@ -18,7 +18,7 @@ def main():
 	#df = df.assign(light=np.nan, dark=np.nan, day_deer=np.nan, day_bucks=np.nan, day_does=np.nan, day_hogs=np.nan, stand=np.nan)
 	#get_sun_data_from_web(df)
 	#get_moon_data_from_web('2018:06:20 21:50:03')
-	get_temp_from_web()
+	get_temp_from_web('2018:06:20 21:50:03')
     
 
 def get_sun_data_from_web(dt):
@@ -132,12 +132,16 @@ def get_moon_data_from_web(date):
 	return moonphase
 
 
-def get_temp_from_web():
+def get_temp_from_web(date):
 	''' gets temperature for a given datetime from wunderground.com'''
-	
-	date_str = '2018-06-06'
+
+	fulldate_list = date.split(':')
+	day_list = fulldate_list[2].split(' ')
+	date_str = fulldate_list[0] + '-' + fulldate_list[1] + '-' + day_list[0]
+
 	base = 'https://www.almanac.com/weather/history/SC/Yemassee/'
 	url = base + date_str
+	print('The url is ' + url)
 
 	r = requests.get(url)
 	html_doc = r.text
@@ -146,7 +150,7 @@ def get_temp_from_web():
 	min_temp = table.findNext('span')
 	units = min_temp.findNext('span')
 	temp = units.findNext('span').text
-	print(temp)
+	print('The temp is ' + temp)
 
 	return temp
 

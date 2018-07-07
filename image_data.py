@@ -85,7 +85,7 @@ def cuddeback_exif(info):
 	print(info)
 
 	time = info[306]
-	tmp = np.NaN
+	tmp = almanac_info.get_temp_from_web(time)
 	cam = 'CUDDEBACK'
 	mn = almanac_info.get_moon_data_from_web(time)
 
