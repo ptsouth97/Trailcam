@@ -17,7 +17,7 @@ def main():
 	#df = pd.read_csv('deer.csv')
 	#df = df.assign(light=np.nan, dark=np.nan, day_deer=np.nan, day_bucks=np.nan, day_does=np.nan, day_hogs=np.nan, stand=np.nan)
 	#get_sun_data_from_web(df)
-	get_moon_data_from_web('2018:06:06 21:50:03')
+	get_moon_data_from_web('2018:06:12 21:50:03')
     
 
 def get_sun_data_from_web(dt):
@@ -33,6 +33,7 @@ def get_sun_data_from_web(dt):
 		r = requests.get(url)
 		html_doc = r.text
 		soup = BeautifulSoup(html_doc, 'lxml')
+		print(soup.prettify())
 
 		table = soup.find('table', {'class': 'rise_results'})
 		dawn = table.findNext('td')
@@ -83,10 +84,31 @@ def get_sun_data_from_web(dt):
 	return dt
 
 
-def get_moon_data_from_web(year_month):
+def get_moon_data_from_web(date):
 	''' takes a date and returns the moon phase'''
 
-	year_month_list = year_month.split(':')
+	fulldate_list = date.split(':')
+	day_list = fulldate_list[2].split(' ')
+	
+	date_str = fulldate_list[1] + '/' + day_list[0] + '/' + fulldate_list[0]
+
+	base = 'https://www.moongiant.com/phase/'
+	url = base + date_str
+	print('The url is ' + url)
+
+	r = requests.get(url)
+	html_doc = r.text
+	soup = BeautifulSoup(html_doc, 'lxml')
+	
+	script = soup.find('script', {'type': 'text/javascript'}) 
+	text = script.text
+	split = text.split('Phase: <span>')
+	divided = str(split[1])
+	phase = divided[0:8]
+	print(phase)
+	
+
+	'''year_month_list = year_month.split(':')
 	year_month_format = year_month_list[0] + '-' + year_month_list[1]
 	day_time = year_month_list[2].split(' ')
 	DoM = int(day_time[0])
@@ -95,7 +117,7 @@ def get_moon_data_from_web(year_month):
 	base = 'https://www.almanac.com/astronomy/moon/calendar/SC/Yemassee/'
 	url = base + year_month_format
 	print('The url is ' + url)
-	r = requests.get(url)
+	ir = requests.get(url)
 	html_doc = r.text
 	soup = BeautifulSoup(html_doc, 'lxml')
 
@@ -107,7 +129,7 @@ def get_moon_data_from_web(year_month):
 	for i in range(0, DoM+4):
 		day = day.findNext('td')
 
-	# print(day)
+	print(day)
 	# THIS IS WHAT 'day' looks like
 	# <td class="calday"><p class="daynumber">3</p><div class="moongraphic"><img alt="Moon Phase" src="https://almanac.s3.amazonaws.com/moon/images/m240.jpg"/><br/></div><p class="phasename nonphase">75%<br/>20 days</p></td>
 
@@ -122,17 +144,28 @@ def get_moon_data_from_web(year_month):
 		phase_name = day.find('p', {'class': 'phasename'})
 		phase_name_text = phase_name.text
 		phase_name_split = phase_name_text.split(' ')
-		moonphase = phase_name_split[0]
-		print(moonphase)
+		moonphase_name = phase_name_split[0]
 
+		if moonphase_name == 'New':
+			moonphase = '0'
+
+		elif moonphase_name == 'First':
+			moonphase = '50'
+
+		elif moonphase_name == 'Last':
+			moonphase = '50'
+
+		elif moonphase_name == 'Full':
+			moonphase = '100'	
+		
 	else:
 		moonphase_text = moonphase_raw.text
 		moonphase_split = moonphase_text.split('%')
 		moonphase = moonphase_split[0]
 
-	# print('The percent illumination is: ' + moonphase)
+	print(moonphase)'''
 
-	return moonphase
+#	return moonphase
 
 
 if __name__ == '__main__':
