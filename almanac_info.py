@@ -107,7 +107,26 @@ def get_moon_data_from_web(date):
 	phase = divided[0:8]
 	print(phase)
 
-	
+	if phase == 'New Moon':
+		moonphase = 'new'
+	elif phase == 'Waxing C':
+		moonphase = 'waxing crescent'
+	elif phase == 'First Qu':
+		moonphase = '1st quarter'
+	elif phase == 'Waxing G':
+		moonphase = 'waxing gibbous'
+	elif phase == 'Full Moo':
+		moonphase = 'full'
+	elif phase == 'Waning G':
+		moonphase = 'waning gibbous'
+	elif phase == 'Third Qu':
+		moonphase = '3rd quarter'
+	elif phase == 'Waning C':
+		moonphase = 'waning crescent'
+	else:
+		moonphase = 'Error not found'
+
+	print(moonphase)
 
 	return moonphase
 
