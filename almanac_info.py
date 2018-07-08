@@ -150,7 +150,7 @@ def get_temp_from_web(date):
 	min_temp = table.findNext('span')
 	units = min_temp.findNext('span')
 	temp = units.findNext('span').text
-	print('The temp is ' + temp)
+	#print('The temp is ' + temp)
 
 	return temp
 

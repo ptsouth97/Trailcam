@@ -95,7 +95,7 @@ def main():
 	plot_data.stand_plot(updated_df)	
 
 	# add this .csv to sqlite database
-	sql.load_csv(name)
+	# sql.load_csv(name)
 
     
 if __name__ == '__main__':

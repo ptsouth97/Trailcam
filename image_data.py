@@ -90,7 +90,7 @@ def browning_exif(info):
 def cuddeback_exif(info):
 	''' get exif data for Cuddeback camera'''
 
-	print(info)
+	#print(info)
 
 	time = info[306]
 	tmp = almanac_info.get_temp_from_web(time)
