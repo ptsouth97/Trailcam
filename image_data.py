@@ -10,7 +10,7 @@ import numpy as np
 def main():
 	''' main function for testing purposes'''
 
-	test_file = 'I__00159.JPG'
+	test_file = 'test_image.JPG'
 	
 	'''with Image.open(test_file) as img:
 		Resize = img.resize((960, 540))
@@ -42,6 +42,14 @@ def getexif(image, d_row):
 	if 'CUDDEBACK' in values:
 		print('The camera is Cuddeback')
 		obs_time, temp, camera, moon = cuddeback_exif(image_info)
+		obs_time = obs_time.replace(':', '')
+		obs_time = obs_time.split(' ')
+		time = obs_time[1]
+		time = time[:-2]
+		date = obs_time[0]
+		date = date[4:6] + date[6:8] + date[2:4]
+		obs_time = time + ':' + date
+		
 
 	elif 'BROWNING' in values:
 		print('The camera is Browning')

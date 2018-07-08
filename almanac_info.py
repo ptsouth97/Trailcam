@@ -106,7 +106,7 @@ def get_moon_data_from_web(date):
 	split = text.split('Phase: <span>')
 	divided = str(split[1])
 	phase = divided[0:8]
-	print(phase)
+	#print(phase)
 
 	if phase == 'New Moon':
 		moonphase = 'new'
@@ -127,7 +127,7 @@ def get_moon_data_from_web(date):
 	else:
 		moonphase = 'Error not found'
 
-	print(moonphase)
+	#print(moonphase)
 
 	return moonphase
 
