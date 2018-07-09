@@ -10,8 +10,9 @@ def main():
 	''' main function for testing'''
 	
 	df = pd.read_csv('test.csv')
-	lunar_plot(df)
-	temp_plot(df)
+	#lunar_plot(df)
+	#temp_plot(df)
+	stand_time_histogram(df)
 
 
 def show_all(df):
@@ -109,6 +110,15 @@ def stand_plot(df):
 	plt.show()
 
 	return
+
+
+def stand_time_histogram(df):
+	''' Plots histogram of deer observation times for a given stand'''
+
+	hogslayer = df[(df['stand'] == 'CAMERA1')]
+	
+	plt.tight_layout()
+	plt.show()
 
 
 if __name__ == '__main__':
