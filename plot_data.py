@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import ScalarFormatter, FormatStrFormatter
 import pandas as pd
 import seaborn as sns
+import numpy as np
 
 
 def main():
@@ -116,7 +117,14 @@ def stand_time_histogram(df):
 	''' Plots histogram of deer observation times for a given stand'''
 
 	hogslayer = df[(df['stand'] == 'CAMERA1')]
-	
+	datetimes = hogslayer.loc[:, 'obs_time']
+	dt_list = datetimes.apply(lambda x: x.split(' '))
+	times = dt_list.apply(lambda x: x.pop(1))
+	print(times)
+	data = times.apply(lambda x: pd.to_datetime(x, format='%H:%M:%S'))
+	print(data)
+	#x = np.array(times)
+	plt.hist(data)
 	plt.tight_layout()
 	plt.show()
 
