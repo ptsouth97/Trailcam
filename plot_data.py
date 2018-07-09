@@ -120,11 +120,13 @@ def stand_time_histogram(df):
 	datetimes = hogslayer.loc[:, 'obs_time']
 	dt_list = datetimes.apply(lambda x: x.split(' '))
 	times = dt_list.apply(lambda x: x.pop(1))
-	print(times)
 	data = times.apply(lambda x: pd.to_datetime(x, format='%H:%M:%S'))
-	print(data)
-	#x = np.array(times)
-	plt.hist(data)
+	hours = data.apply(lambda x: x.hour)
+	grouped_hours = hours.value_counts()
+	grouped_hours = grouped_hours.sort_index()
+	grouped_hours.plot(kind='bar', rot=45)
+	plt.xlabel('Hour')
+	plt.ylabel('Number of observations')
 	plt.tight_layout()
 	plt.show()
 
