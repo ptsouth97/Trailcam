@@ -13,13 +13,13 @@ import sql
 def main():
 	''' function goes through each image in a folder and user determines how many deer or hogs are in the picture'''
 
-	folder = input('What is the name of the folder to be analyzed? ').lstrip()
+	folder = input('What is the name of the folder to be analyzed? ').strip()
 	path = './deer/' + folder
 	filelist = os.listdir(path)
 	os.chdir(path)
 
 	columns = ['obs_time', 'temp', 'moon', 'stand', 'deer', 'bucks', 'does', 'hogs']
-	stand = input('What stand are you recording data for? ').lstrip().upper()
+	stand = input('What stand are you recording data for? ').strip().upper()
 	df = pd.DataFrame(columns=columns) 
 
 	for file in filelist:
