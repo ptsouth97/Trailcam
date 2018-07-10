@@ -19,7 +19,7 @@ def main():
 	os.chdir(path)
 
 	columns = ['obs_time', 'temp', 'moon', 'stand', 'deer', 'bucks', 'does', 'hogs']
-	stand = input('What stand are you recording data for? ').lstrip()
+	stand = input('What stand are you recording data for? ').lstrip().upper()
 	df = pd.DataFrame(columns=columns) 
 
 	for file in filelist:
