@@ -19,6 +19,7 @@ def main():
 	os.chdir(path)
 
 	columns = ['obs_time', 'temp', 'moon', 'stand', 'deer', 'bucks', 'does', 'hogs']
+	stand = input('What stand are you recording data for? ')
 	df = pd.DataFrame(columns=columns) 
 
 	for file in filelist:
@@ -65,7 +66,7 @@ def main():
 
 		# Get exif data from image
 		image = Image.open(file)
-		df_row = image_data.getexif(image, df_row)
+		df_row = image_data.getexif(image, df_row, stand)
 		df = df.append(df_row)
 		image.close()
 	

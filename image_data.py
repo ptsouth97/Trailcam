@@ -28,7 +28,7 @@ def main():
 	getexif(img, df)
 
 
-def getexif(image, d_row):
+def getexif(image, d_row, stnd):
 	''' extracts metadata from image and places in a dataframe row that gets appended to the main dataframe in the app'''
 
 	# create a dictionary with the image exif data
@@ -53,12 +53,12 @@ def getexif(image, d_row):
 
 	elif 'BROWNING' in values:
 		print('The camera is Browning')
-		obs_time, temp, camera, moon = browning_exif(image_info)
+		obs_time, temp, moon = browning_exif(image_info)
 
 	d_row.iloc[0][0] = obs_time
 	d_row.iloc[0][1] = temp
 	d_row.iloc[0][2] = moon
-	d_row.iloc[0][3] = camera
+	d_row.iloc[0][3] = stnd
 
 	# FOR TESTING PURPOSES
 	if __name__ == '__main__':
@@ -80,11 +80,11 @@ def browning_exif(info):
 	time = metadata_list[0] + ':' + metadata_list[1]
 	tmp_units = metadata_list[2]
 	tmp = tmp_units[:-1]
-	cam = metadata_list[4]
+	# cam = metadata_list[4] 
 	mn_info = metadata_list[5]
 	mn = mn_info[0:2]
 
-	return(time, tmp, cam, mn)
+	return(time, tmp, mn)
 
 
 def cuddeback_exif(info):
