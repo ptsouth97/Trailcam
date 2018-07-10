@@ -131,5 +131,18 @@ def stand_time_histogram(df):
 	plt.show()
 
 
+def hogs_stand_plot(df):
+	'''plots the number of hogs seen at each stand'''
+	
+	location = df.groupby('stand').hogs.sum()
+	location.plot(kind='bar', rot=45)
+	plt.xlabel('Stand')
+	plt.ylabel('Number of hogs photographed')
+	plt.title('Number of hogs by stand')
+	plt.tight_layout()
+	plt.show()
+	return
+
+
 if __name__ == '__main__':
 	main()

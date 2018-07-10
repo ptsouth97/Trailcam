@@ -94,6 +94,7 @@ def main():
 	plot_data.lunar_plot(updated_df)
 	plot_data.temp_plot(updated_df)
 	plot_data.stand_plot(updated_df)	
+	plot_data.hogs_stand_plot(updated_df)
 
 	# add this .csv to sqlite database
 	# sql.load_csv(name)
