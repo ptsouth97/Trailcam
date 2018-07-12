@@ -165,6 +165,7 @@ def hogs_stand_time_histogram(df):
 	hogs_by_hour.plot(kind='bar', rot=45)
 	plt.xlabel('Hour')
 	plt.ylabel('Number of observations')
+	plt.title('Number of hogs observed by hour')
 	plt.tight_layout()
 	plt.show()
 
