@@ -119,23 +119,18 @@ def stand_time_histogram(df):
 	hogslayer = df[(df['stand'] == 'CAMERA1')]
 	hogslayer_deer = df[(df['deer'] > 0)]
 	datetimes = hogslayer_deer.loc[:, ['obs_time', 'deer']]
-	print(datetimes)
 	dt_list = datetimes['obs_time'].apply(lambda x: x.split(' '))
-	print(dt_list)
 	times = dt_list.apply(lambda x: x.pop(1))
 	data = times.apply(lambda x: pd.to_datetime(x, format='%H:%M:%S'))
 	hours = data.apply(lambda x: x.hour)
 	hours_column = pd.Series(hours)
 	datetimes['time_hour'] = hours_column.values
-	print(datetimes)
-	#grouped_hours = hours.value_counts()
-	#grouped_hours = grouped_hours.sort_index()
 	grouped_hours = datetimes.groupby('time_hour')
 	deer_by_hour = grouped_hours['deer'].sum()
 	deer_by_hour.plot(kind='bar', rot=45)
-	#grouped_hours.plot(kind='bar', rot=45)
 	plt.xlabel('Hour')
 	plt.ylabel('Number of observations')
+	plt.title('Number of deer observed by hour')
 	plt.tight_layout()
 	plt.show()
 
