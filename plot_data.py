@@ -13,7 +13,7 @@ def main():
 	df = pd.read_csv('test.csv')
 	#lunar_plot(df)
 	#temp_plot(df)
-	stand_time_histogram(df)
+	hogs_stand_time_histogram(df)
 
 
 def show_all(df):
@@ -148,18 +148,21 @@ def hogs_stand_plot(df):
 	return
 
 
-def hog_stand_time_histogram(df):
+def hogs_stand_time_histogram(df):
 	''' Plots histogram of hog observation times for a given stand'''
 
 	hogslayer = df[(df['stand'] == 'CAMERA1')]
-	datetimes = hogslayer.loc[:, 'obs_time']
-	dt_list = datetimes.apply(lambda x: x.split(' '))
+	hogslayer_hogs = df[(df['hogs'] > 0)]
+	datetimes = hogslayer_hogs.loc[:, ['obs_time', 'hogs']]
+	dt_list = datetimes['obs_time'].apply(lambda x: x.split(' '))
 	times = dt_list.apply(lambda x: x.pop(1))
 	data = times.apply(lambda x: pd.to_datetime(x, format='%H:%M:%S'))
 	hours = data.apply(lambda x: x.hour)
-	grouped_hours = hours.value_counts()
-	grouped_hours = grouped_hours.sort_index()
-	grouped_hours.plot(kind='bar', rot=45)
+	hours_column = pd.Series(hours)
+	datetimes['time_hour'] = hours_column.values	
+	grouped_hours = datetimes.groupby('time_hour')
+	hogs_by_hour = grouped_hours['hogs'].sum()
+	hogs_by_hour.plot(kind='bar', rot=45)
 	plt.xlabel('Hour')
 	plt.ylabel('Number of observations')
 	plt.tight_layout()
