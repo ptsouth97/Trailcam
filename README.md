@@ -4,5 +4,7 @@ This application's purpose is to classify what types of animals are captured on 
 
 The application was tested using Python 3.5 running on Ubuntu and relies on:
 * [Matplotlib](https://matplotlib.org/)
+* [Numpy](http://www.numpy.org/)
 * [Pandas](https://pandas.pydata.org/)
 * [Pillow](https://pillow.readthedocs.io/en/5.1.x/)
+* [Requests](http://docs.python-requests.org/en/master/)
