@@ -13,3 +13,5 @@ The application was tested using Python 3.5 running on Ubuntu and relies on:
 * [SQLAlchemy](https://www.sqlalchemy.org/)
 
 ## How it works
+
+## Future plans
