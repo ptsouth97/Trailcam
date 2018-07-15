@@ -27,3 +27,4 @@ The application was tested using Python 3.5 running on Ubuntu and relies on:
 11. This dataframe can then be appended to a SQLite database
 
 ## Future plans
+* Implementing a machine learning algorithm to automatically identify animals in the pictures
