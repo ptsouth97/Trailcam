@@ -15,7 +15,7 @@ The application was tested using Python 3.5 running on Ubuntu and relies on:
 ## How it works
 
 1. Clone the repository
-2. To run from the command line, use 'chmod +x app_trailcam.py' 
+2. To run from the main application from the command line, use 'chmod +x app_trailcam.py' 
 3. In the working directory, there is a folder called 'deer'
 4. After obtaining images, add them to the 'deer' folder in a named subfolder of your choice
 5. When you run the program, you will be asked to enter the name of this folder
@@ -23,7 +23,7 @@ The application was tested using Python 3.5 running on Ubuntu and relies on:
 7. For each image you will be asked if you want to record this image (i.e., is there an animal of interest in the frame)
 8. If so, you will be asked how many deer/hogs and the sex of the deer
 9. The program will determine the temperature, moonphase, and sunset/sunrise based on the time of observation 
-10.The program will create a Pandas dataframe with the relevant information
-11.This dataframe can then be appended to a SQLite database
+10. The program will create a Pandas dataframe with the relevant information
+11. This dataframe can then be appended to a SQLite database
 
 ## Future plans
