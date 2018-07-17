@@ -16,6 +16,9 @@ def main():
 	folder = input('What is the name of the folder to be analyzed? ').strip()
 	path = './deer/' + folder
 	filelist = os.listdir(path)
+	num_of_files = len(filelist)
+	count = 1
+
 	os.chdir(path)
 
 	columns = ['obs_time', 'temp', 'moon', 'stand', 'deer', 'bucks', 'does', 'hogs']
@@ -23,6 +26,15 @@ def main():
 	df = pd.DataFrame(columns=columns) 
 
 	for file in filelist:
+
+		if num_of_files == 0:
+			print('Folder is empty')
+
+		else:
+			print('Now on image {} of {}'.format(str(count), str(num_of_files)))
+			print('')
+
+		count += 1
 
 		# create a 1 row dataframe (df_row) that will be appended to df after collecting the info
 		df_row = pd.DataFrame(columns=columns, index=range(0,1))
