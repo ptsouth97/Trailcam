@@ -17,9 +17,9 @@ def plt_imshow(picture):
 
 	fig = plt.figure()
 	img = mpimg.imread(picture)
-	plt.imshow(img, cmap='hot')
-	plt.set_cmap('hot')
-	plt.colorbar()
+	plt.imshow(img)
+	#plt.set_cmap('hot')
+	#plt.colorbar()
 	plt.show(block=False)
 	
 	if __name__ == '__main__':
