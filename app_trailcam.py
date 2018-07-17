@@ -27,12 +27,8 @@ def main():
 
 	for file in filelist:
 
-		if num_of_files == 0:
-			print('Folder is empty')
-
-		else:
-			print('Now on image {} of {}'.format(str(count), str(num_of_files)))
-			print('')
+		print('Now on image {} of {}'.format(str(count), str(num_of_files)))
+		print('')
 
 		count += 1
 
@@ -82,47 +78,54 @@ def main():
 		df = df.append(df_row)
 		image.close()
 	
+	while True:
 
-	df['obs_time'] = pd.to_datetime(df['obs_time'], format='%H%M:%m%d%y')
+		if num_of_files == 0:
+			print('Folder is empty')
+			print('')
+			break
+
+		df['obs_time'] = pd.to_datetime(df['obs_time'], format='%H%M:%m%d%y')
     
-	# os.chdir('..')
-	os.chdir('../..')
-	name = folder + '.csv'
+		# os.chdir('..')
+		os.chdir('../..')
+		name = folder + '.csv'
 	
-	df = df.assign(light=np.nan, dark=np.nan, day_deer=np.nan, day_bucks=np.nan, day_does=np.nan, day_hogs=np.nan)
-	df = df.reset_index(drop=True)
+		df = df.assign(light=np.nan, dark=np.nan, day_deer=np.nan, day_bucks=np.nan, day_does=np.nan, day_hogs=np.nan)
+		df = df.reset_index(drop=True)
 
-	# FOR TESTING
-	# print('UPDATED DF')
-	# print(df)
-	# print('')
-
-	# If dataframe is not empty, get more information then plot data
-	if df.empty == False:
-
-		updated_df = almanac_info.get_sun_data_from_web(df)
-		updated_df.to_csv(name, index=False)
-		# print('FINAL DF')
-		# print(updated_df)
+		# FOR TESTING
+		# print('UPDATED DF')
+		# print(df)
 		# print('')
 
-		plot_data.lunar_plot(updated_df)
-		plot_data.temp_plot(updated_df)
-		plot_data.stand_plot(updated_df)	
-		plot_data.hogs_stand_plot(updated_df)
+		# If dataframe is not empty, get more information then plot data
+		if df.empty == False:
 
-		# Option to add the dataframe (stored in .csv file) to the SQLite database
-		add_to_sql = input('Do you want to add this dataframe to the SQLite database? [1]=Yes, [any other key]=No ').strip()
-		if add_to_sql == '1':
-			sql.load_csv(name)
-			print('Adding to database...')
+			updated_df = almanac_info.get_sun_data_from_web(df)
+			updated_df.to_csv(name, index=False)
+			# print('FINAL DF')
+			# print(updated_df)
+			# print('')
+
+			plot_data.lunar_plot(updated_df)
+			plot_data.temp_plot(updated_df)
+			plot_data.stand_plot(updated_df)	
+			plot_data.hogs_stand_plot(updated_df)
+
+			# Option to add the dataframe (stored in .csv file) to the SQLite database
+			add_to_sql = input('Do you want to add this dataframe to the SQLite database? [1]=Yes, [any other key]=No ').strip()
+			if add_to_sql == '1':
+				sql.load_csv(name)
+				print('Adding to database...')
+				print('')
+
+		else:
+			print('Dataframe is empty')
 			print('')
 
-	else:
-		print('Dataframe is empty')
-		print('')
-
-	print('Goodbye')
+		print('Goodbye')
+		break
 
     
 if __name__ == '__main__':
