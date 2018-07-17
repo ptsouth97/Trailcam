@@ -106,6 +106,12 @@ def main():
 			print('Adding to database...')
 			print('')
 
+	else:
+		print('Dataframe is empty')
+		print('')
+
+	print('Goodbye')
+
     
 if __name__ == '__main__':
 	main()
