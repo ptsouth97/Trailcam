@@ -84,24 +84,27 @@ def main():
 	# print('UPDATED DF')
 	# print(df)
 	# print('')
-	
-	updated_df = almanac_info.get_sun_data_from_web(df)
-	updated_df.to_csv(name, index=False)
-	# print('FINAL DF')
-	# print(updated_df)
-	# print('')
 
-	plot_data.lunar_plot(updated_df)
-	plot_data.temp_plot(updated_df)
-	plot_data.stand_plot(updated_df)	
-	plot_data.hogs_stand_plot(updated_df)
+	# If dataframe is not empty, get more information then plot data
+	if df.empty == False:
 
-	# Option to add the dataframe (stored in .csv file) to the SQLite database
-	add_to_sql = input('Do you want to add this dataframe to the SQLite database? [1]=Yes, [any other key]=No ').strip()
-	if add_to_sql == '1':
-		sql.load_csv(name)
-		print('Adding to database...')
-		print('')
+		updated_df = almanac_info.get_sun_data_from_web(df)
+		updated_df.to_csv(name, index=False)
+		# print('FINAL DF')
+		# print(updated_df)
+		# print('')
+
+		plot_data.lunar_plot(updated_df)
+		plot_data.temp_plot(updated_df)
+		plot_data.stand_plot(updated_df)	
+		plot_data.hogs_stand_plot(updated_df)
+
+		# Option to add the dataframe (stored in .csv file) to the SQLite database
+		add_to_sql = input('Do you want to add this dataframe to the SQLite database? [1]=Yes, [any other key]=No ').strip()
+		if add_to_sql == '1':
+			sql.load_csv(name)
+			print('Adding to database...')
+			print('')
 
     
 if __name__ == '__main__':
