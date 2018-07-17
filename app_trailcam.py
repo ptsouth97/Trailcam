@@ -96,8 +96,12 @@ def main():
 	plot_data.stand_plot(updated_df)	
 	plot_data.hogs_stand_plot(updated_df)
 
-	# add this .csv to sqlite database
-	# sql.load_csv(name)
+	# Option to add the dataframe (stored in .csv file) to the SQLite database
+	add_to_sql = input('Do you want to add this dataframe to the SQLite database? [1]=Yes, [any other key]=No ').strip()
+	if add_to_sql == '1':
+		sql.load_csv(name)
+		print('Adding to database...')
+		print('')
 
     
 if __name__ == '__main__':
