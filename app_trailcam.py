@@ -14,7 +14,7 @@ def main():
 	''' function goes through each image in a folder and user determines how many deer or hogs are in the picture'''
 
 	folder = input('What is the name of the folder to be analyzed? ').strip()
-	path = './deer/' + folder
+	path = './trailcam_images/' + folder
 	filelist = os.listdir(path)
 	num_of_files = len(filelist)
 	count = 1

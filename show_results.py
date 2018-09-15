@@ -18,7 +18,7 @@ def main():
 
 	stmt = select([game])
 
-	stmt = stmt.where(game.columns.deer > 0)
+	stmt = stmt.where(game.columns.hogs > 0)
 
 	result_proxy = connection.execute(stmt)
 	results = result_proxy.fetchall()
@@ -29,7 +29,8 @@ def main():
 	df = pd.DataFrame(results, columns=columns)
 	df = df.apply(pd.to_numeric, errors='ignore')
 
-	plot_data.show_all(df)
+	plot_data.hogs_stand_time_histogram(df)
+	# plot_data.show_all(df)
 	'''plot_data.lunar_plot(df)
 	plot_data.temp_plot(df)
 	plot_data.stand_plot(df)'''

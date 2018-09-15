@@ -11,8 +11,11 @@ def main():
 	''' main function for testing'''
 	
 	df = pd.read_csv('test.csv')
-	#lunar_plot(df)
-	#temp_plot(df)
+	lunar_plot(df)
+	temp_plot(df)
+	stand_plot(df)
+	stand_time_histogram(df)
+	hogs_stand_plot(df)
 	hogs_stand_time_histogram(df)
 
 
@@ -35,7 +38,7 @@ def show_all(df):
 	plt.hist(df['temp'], bins=10)
 	plt.xlabel('Temp (F)')
 	plt.ylabel('Number of deer')
-	plt.ticklabel_format(useOffset=False)
+	plt.gca().ticklabel_format(useOffset=False)
 	plt.title('Number of deer by temperature')
 	plt.tight_layout()
 	
@@ -91,7 +94,7 @@ def temp_plot(df):
 	plt.scatter(df['temp'], df['deer'])
 	plt.xlabel('Temp (F)')
 	plt.ylabel('Number of deer photographed')
-	plt.ticklabel_format(useOffset=False)
+	plt.gca().ticklabel_format(useOffset=False)
 	plt.title('Number of deer by temperature')
 	plt.tight_layout()
 	plt.show()
@@ -151,9 +154,9 @@ def hogs_stand_plot(df):
 def hogs_stand_time_histogram(df):
 	''' Plots histogram of hog observation times for a given stand'''
 
-	hogslayer = df[(df['stand'] == 'CAMERA1')]
-	hogslayer_hogs = df[(df['hogs'] > 0)]
-	datetimes = hogslayer_hogs.loc[:, ['obs_time', 'hogs']]
+	swamp = df[(df['stand'] == 'SWAMP')]
+	swamp_hogs = df[(df['hogs'] > 0)]
+	datetimes = swamp_hogs.loc[:, ['obs_time', 'hogs']]
 	dt_list = datetimes['obs_time'].apply(lambda x: x.split(' '))
 	times = dt_list.apply(lambda x: x.pop(1))
 	data = times.apply(lambda x: pd.to_datetime(x, format='%H:%M:%S'))
