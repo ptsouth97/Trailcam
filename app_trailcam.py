@@ -108,10 +108,10 @@ def main():
 			# print(updated_df)
 			# print('')
 
-			plot_data.lunar_plot(updated_df)
-			plot_data.temp_plot(updated_df)
-			plot_data.stand_plot(updated_df)	
-			plot_data.hogs_stand_plot(updated_df)
+			# plot_data.lunar_plot(updated_df)
+			# plot_data.temp_plot(updated_df)
+			# plot_data.stand_plot(updated_df)	
+			# plot_data.hogs_stand_plot(updated_df)
 
 			# Option to add the dataframe (stored in .csv file) to the SQLite database
 			add_to_sql = input('Do you want to add this dataframe to the SQLite database? [1]=Yes, [any other key]=No ').strip()
