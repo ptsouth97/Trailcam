@@ -116,12 +116,13 @@ def stand_plot(df):
 	return
 
 
-def stand_time_histogram(df):
+def stand_time_histogram(df, stand):
 	''' Plots histogram of deer observation times for a given stand'''
 
-	hogslayer = df[(df['stand'] == 'CAMERA1')]
-	hogslayer_deer = df[(df['deer'] > 0)]
-	datetimes = hogslayer_deer.loc[:, ['obs_time', 'deer']]
+	stand_info = df[(df['stand'] == stand)]
+	#hogslayer = df[(df['stand'] == 'CAMERA1')]
+	stand_deer = stand_info[(stand_info['deer'] > 0)]
+	datetimes = stand_deer.loc[:, ['obs_time', 'deer']]
 	dt_list = datetimes['obs_time'].apply(lambda x: x.split(' '))
 	times = dt_list.apply(lambda x: x.pop(1))
 	data = times.apply(lambda x: pd.to_datetime(x, format='%H:%M:%S'))

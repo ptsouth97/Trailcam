@@ -50,12 +50,21 @@ def main():
 			plot_data.temp_plot(df)
 
 		if choice == '3':
+			print('Which stand?')
+			print('(1) OAKGROVE')
+			print('(2) HOGSLAYER')
+			selection = input('Enter a number ').strip()
+			if selection == '1':
+				stand = 'OAKGROVE'
+			if selection == '2':
+				stand = 'HOGSLAYER'
+			
 			stmt = stmt.where(game.columns.deer > 0)
 			result_proxy = connection.execute(stmt)
 			results = result_proxy.fetchall()
 			df = pd.DataFrame(results, columns=columns)
 			df = df.apply(pd.to_numeric, errors='ignore')
-			plot_data.stand_time_histogram(df)
+			plot_data.stand_time_histogram(df, stand)
 
 	print('')
 	print('Goodbye...')
