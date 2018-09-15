@@ -116,13 +116,11 @@ def stand_plot(df):
 	return
 
 
-def stand_time_histogram(df, stand):
-	''' Plots histogram of deer observation times for a given stand'''
+def stand_time_histogram(df, animal):
+	''' Plots histogram of animal observation times for a given stand'''
 
-	stand_info = df[(df['stand'] == stand)]
-	#hogslayer = df[(df['stand'] == 'CAMERA1')]
-	stand_deer = stand_info[(stand_info['deer'] > 0)]
-	datetimes = stand_deer.loc[:, ['obs_time', 'deer']]
+	df_animal = df[(df[animal] > 0)]
+	datetimes = df_animal.loc[:, ['obs_time', animal]]
 	dt_list = datetimes['obs_time'].apply(lambda x: x.split(' '))
 	times = dt_list.apply(lambda x: x.pop(1))
 	data = times.apply(lambda x: pd.to_datetime(x, format='%H:%M:%S'))
@@ -130,11 +128,12 @@ def stand_time_histogram(df, stand):
 	hours_column = pd.Series(hours)
 	datetimes['time_hour'] = hours_column.values
 	grouped_hours = datetimes.groupby('time_hour')
-	deer_by_hour = grouped_hours['deer'].sum()
-	deer_by_hour.plot(kind='bar', rot=45)
+	animals_by_hour = grouped_hours[animal].sum()
+	animals_by_hour.plot(kind='bar', rot=45)
+	title = 'Number of ' +animal+ ' observed by hour'
 	plt.xlabel('Hour')
 	plt.ylabel('Number of observations')
-	plt.title('Number of deer observed by hour')
+	plt.title(title)
 	plt.tight_layout()
 	plt.show()
 
@@ -152,26 +151,7 @@ def hogs_stand_plot(df):
 	return
 
 
-def hogs_stand_time_histogram(df):
-	''' Plots histogram of hog observation times for a given stand'''
 
-	swamp = df[(df['stand'] == 'SWAMP')]
-	swamp_hogs = df[(df['hogs'] > 0)]
-	datetimes = swamp_hogs.loc[:, ['obs_time', 'hogs']]
-	dt_list = datetimes['obs_time'].apply(lambda x: x.split(' '))
-	times = dt_list.apply(lambda x: x.pop(1))
-	data = times.apply(lambda x: pd.to_datetime(x, format='%H:%M:%S'))
-	hours = data.apply(lambda x: x.hour)
-	hours_column = pd.Series(hours)
-	datetimes['time_hour'] = hours_column.values	
-	grouped_hours = datetimes.groupby('time_hour')
-	hogs_by_hour = grouped_hours['hogs'].sum()
-	hogs_by_hour.plot(kind='bar', rot=45)
-	plt.xlabel('Hour')
-	plt.ylabel('Number of observations')
-	plt.title('Number of hogs observed by hour')
-	plt.tight_layout()
-	plt.show()
 
 
 if __name__ == '__main__':
