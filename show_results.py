@@ -27,6 +27,7 @@ def main():
 		print('(0) exit')
 		print('(1) View deer by moonphase')
 		print('(2) View deer by temperature')
+		print('(3) View deer time histogram for a stand')
 		choice = input('What do you want to do? ').strip()
 
 		if choice == '0':
@@ -48,16 +49,16 @@ def main():
 			df = df.apply(pd.to_numeric, errors='ignore')
 			plot_data.temp_plot(df)
 
+		if choice == '3':
+			stmt = stmt.where(game.columns.deer > 0)
+			result_proxy = connection.execute(stmt)
+			results = result_proxy.fetchall()
+			df = pd.DataFrame(results, columns=columns)
+			df = df.apply(pd.to_numeric, errors='ignore')
+			plot_data.stand_time_histogram(df)
 
-	# plot_data.hogs_stand_time_histogram(df)
-	# plot_data.show_all(df)
-	'''plot_data.lunar_plot(df)
-	plot_data.temp_plot(df)
-	plot_data.stand_plot(df)'''
-
-	# for result in results:
-	#	print(result.obs_time, result.stand, result.deer)
-
+	print('')
+	print('Goodbye...')
 
 if __name__ == '__main__':
 	main()
