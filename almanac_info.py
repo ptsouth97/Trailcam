@@ -17,8 +17,8 @@ def main():
 	#df = pd.read_csv('deer.csv')
 	#df = df.assign(light=np.nan, dark=np.nan, day_deer=np.nan, day_bucks=np.nan, day_does=np.nan, day_hogs=np.nan, stand=np.nan)
 	#get_sun_data_from_web(df)
-	#get_moon_data_from_web('2018:06:20 21:50:03')
-	get_temp_from_web('2018:06:20 21:50:03')
+	get_moon_data_from_web('2018:09:16 21:50:03')
+	#get_temp_from_web('2018:06:20 21:50:03')
     
 
 def get_sun_data_from_web(dt):
@@ -106,7 +106,7 @@ def get_moon_data_from_web(date):
 	split = text.split('Phase: <span>')
 	divided = str(split[1])
 	phase = divided[0:8]
-	#print(phase)
+	print(phase)
 
 	if phase == 'New Moon':
 		moonphase = 'new'
@@ -120,14 +120,14 @@ def get_moon_data_from_web(date):
 		moonphase = 'full'
 	elif phase == 'Waning G':
 		moonphase = 'waning gibbous'
-	elif phase == 'Third Qu':
+	elif phase == 'Last Qua':
 		moonphase = '3rd quarter'
 	elif phase == 'Waning C':
 		moonphase = 'waning crescent'
 	else:
 		moonphase = 'Error not found'
 
-	#print(moonphase)
+	print(moonphase)
 
 	return moonphase
 
