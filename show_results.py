@@ -100,8 +100,11 @@ def main():
 						print('')
 
 				df_stand = df[(df['stand'] == stand)]
-			
-				plot_data.stand_time_histogram(df_stand, animal, stand)
+				if df_stand.empty == True:
+					print('Dataframe is empty')
+				else:			
+					plot_data.stand_time_histogram(df_stand, animal, stand)
+
 				break
 
 			else:
