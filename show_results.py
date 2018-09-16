@@ -23,22 +23,35 @@ def main():
 
 
 	while True:
-		animal = input('Do you want to analyze (1) deer or (2) hogs? ').strip()
-		print('')
-		
-		if animal == '1':
-			animal = 'deer'
-			stmt == stmt.where(game.columns.deer > 0)
+		while True:
+			print('CHOICES')
+			print('(0) exit')
+			print('(1) analyze deer')
+			print('(2) analyze hogs')
+			animal = input('What do you want to do? ').strip()
+			print('')
 
-		if animal == '2':
-			animal = 'hogs'
-			stmt == stmt.where(game.columns.hogs > 0)
+			if animal == '0':
+				break
 		
+			if animal == '1':
+				animal = 'deer'
+				stmt == stmt.where(game.columns.deer > 0)
+				break
 
-		result_proxy = connection.execute(stmt)
-		results = result_proxy.fetchall()
-		df = pd.DataFrame(results, columns=columns)
-		df = df.apply(pd.to_numeric, errors='ignore')
+			if animal == '2':
+				animal = 'hogs'
+				stmt == stmt.where(game.columns.hogs > 0)
+				break
+		
+		if animal == '0':
+			break
+
+		else:
+			result_proxy = connection.execute(stmt)
+			results = result_proxy.fetchall()
+			df = pd.DataFrame(results, columns=columns)
+			df = df.apply(pd.to_numeric, errors='ignore')
 
 		print('CHOICES:')
 		print('(0) exit')
