@@ -36,12 +36,12 @@ def main():
 		
 			if animal == '1':
 				animal = 'deer'
-				stmt == stmt.where(game.columns.deer > 0)
+				stmt = stmt.where(game.columns.deer > 0)
 				break
 
 			if animal == '2':
 				animal = 'hogs'
-				stmt == stmt.where(game.columns.hogs > 0)
+				stmt = stmt.where(game.columns.hogs > 0)
 				break
 
 			else:
