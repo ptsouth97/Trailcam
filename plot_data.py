@@ -75,6 +75,18 @@ def show_all(df):
 	plt.show()
 
 
+def plot_all_stands(df):
+	''' plots total number of observations for each stand'''
+
+	total = df.groupby('stand').hogs.sum()
+	total.plot(kind='bar', rot=45)
+	plt.xlabel('Stand')
+	plt.ylabel('Total photographic observations')
+	plt.title('Total number of observations by stand')
+	plt.tight_layout()
+	plt.show()
+
+
 def lunar_plot(df):
 	''' Plots number of deer photographed during daylight hours by moon phase'''
 

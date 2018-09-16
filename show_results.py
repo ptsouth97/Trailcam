@@ -62,6 +62,7 @@ def main():
 			print('(1) View by moonphase')
 			print('(2) View by temperature')
 			print('(3) View time histogram for a stand')
+			print('(4) View total observations by stand')
 			choice = input('What do you want to do? ').strip()
 
 			if choice == '0':
@@ -105,6 +106,10 @@ def main():
 				else:			
 					plot_data.stand_time_histogram(df_stand, animal, stand)
 
+				break
+
+			if choice == '4':
+				plot_data.plot_all_stands(df)
 				break
 
 			else:
