@@ -43,6 +43,9 @@ def main():
 				animal = 'hogs'
 				stmt == stmt.where(game.columns.hogs > 0)
 				break
+
+			else:
+				print('Please enter a valid choice')
 		
 		if animal == '0':
 			break
@@ -84,7 +87,7 @@ def main():
 
 			df_stand = df[(df['stand'] == stand)]
 			
-			plot_data.stand_time_histogram(df_stand, animal)
+			plot_data.stand_time_histogram(df_stand, animal, stand)
 
 	print('')
 	print('Goodbye...')

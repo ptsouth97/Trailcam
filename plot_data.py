@@ -117,7 +117,7 @@ def stand_plot(df):
 	return
 
 
-def stand_time_histogram(df, animal):
+def stand_time_histogram(df, animal, stand):
 	''' Plots histogram of animal observation times for a given stand'''
 
 	df_animal = df[(df[animal] > 0)]
@@ -131,7 +131,7 @@ def stand_time_histogram(df, animal):
 	grouped_hours = datetimes.groupby('time_hour')
 	animals_by_hour = grouped_hours[animal].sum()
 	animals_by_hour.plot(kind='bar', rot=45)
-	title = 'Number of ' +animal+ ' observed by hour'
+	title = stand+ ': Number of ' +animal+ ' observed by hour'
 	plt.xlabel('Hour')
 	plt.ylabel('Number of observations')
 	plt.title(title)
