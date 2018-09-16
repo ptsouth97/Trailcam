@@ -22,8 +22,30 @@ def main():
 	os.chdir(path)
 
 	columns = ['obs_time', 'temp', 'moon', 'stand', 'deer', 'bucks', 'does', 'hogs']
-	stand = input('What stand are you recording data for? ').strip().upper()
-	df = pd.DataFrame(columns=columns) 
+	df = pd.DataFrame(columns=columns)
+
+	while True:
+		print('STAND CHOICES:')
+		print('(1) OAKGROVE')
+		print('(2) SWAMP')
+		print('(3) HOGSLAYER')
+		print('(4) CULDESAC')
+		stand_choice = input('What stand are you recording data for? ').strip()
+		if stand_choice == '1':
+			stand = 'OAKGROVE'
+			break
+		if stand_choice == '2':
+			stand = 'SWAMP'
+			break
+		if stand_choice == '3':
+			stand = 'HOGSLAYER'
+			break
+		if stand_choice == '4':
+			stand = 'CULDESAC'
+			break
+		else:
+			print('Please enter a valid choice')
+			print('')
 
 	for file in filelist:
 
