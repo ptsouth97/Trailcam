@@ -56,38 +56,57 @@ def main():
 			df = pd.DataFrame(results, columns=columns)
 			df = df.apply(pd.to_numeric, errors='ignore')
 
-		print('CHOICES:')
-		print('(0) exit')
-		print('(1) View by moonphase')
-		print('(2) View by temperature')
-		print('(3) View time histogram for a stand')
-		choice = input('What do you want to do? ').strip()
+		while True:
+			print('CHOICES:')
+			print('(0) exit')
+			print('(1) View by moonphase')
+			print('(2) View by temperature')
+			print('(3) View time histogram for a stand')
+			choice = input('What do you want to do? ').strip()
 
-		if choice == '0':
-			break
+			if choice == '0':
+				break
 
-		if choice == '1':
-			plot_data.lunar_plot(df)
+			if choice == '1':
+				plot_data.lunar_plot(df)
+				break
 
-		if choice == '2':
-			plot_data.temp_plot(df, animal)
+			if choice == '2':
+				plot_data.temp_plot(df, animal)
+				break
 
-		if choice == '3':
-			print('Which stand?')
-			print('(1) OAKGROVE')
-			print('(2) HOGSLAYER')
-			print('(3) SWAMP')
-			selection = input('Enter a number ').strip()
-			if selection == '1':
-				stand = 'OAKGROVE'
-			if selection == '2':
-				stand = 'HOGSLAYER'
-			if selection == '3':
-				stand = 'SWAMP'
+			if choice == '3':
+				while True:
+					print('Which stand?')
+					print('(1) OAKGROVE')
+					print('(2) HOGSLAYER')
+					print('(3) SWAMP')
+					print('(4) CULDESAC')
+					selection = input('Enter a number ').strip()
+					if selection == '1':
+						stand = 'OAKGROVE'
+						break
+					if selection == '2':
+						stand = 'HOGSLAYER'
+						break
+					if selection == '3':
+						stand = 'SWAMP'
+						break
+					if selection == '4':
+						stand = 'CULDESAC'
+						break
+					else:
+						print('Please enter a valid choice ')
+						print('')
 
-			df_stand = df[(df['stand'] == stand)]
+				df_stand = df[(df['stand'] == stand)]
 			
-			plot_data.stand_time_histogram(df_stand, animal, stand)
+				plot_data.stand_time_histogram(df_stand, animal, stand)
+				break
+
+			else:
+				print('Please enter a valid choice ')
+				print('')
 
 	print('')
 	print('Goodbye...')
