@@ -88,14 +88,15 @@ def lunar_plot(df):
 
 	return
 
-def temp_plot(df):
-	''' Plots number of deer photographed vs temperature'''
+def temp_plot(df, animal):
+	''' Plots number of animals photographed vs temperature'''
 	
-	plt.scatter(df['temp'], df['deer'])
+	plt.scatter(df['temp'], df[animal])
 	plt.xlabel('Temp (F)')
-	plt.ylabel('Number of deer photographed')
+	plt.ylabel('Number of photographic observations')
 	plt.gca().ticklabel_format(useOffset=False)
-	plt.title('Number of deer by temperature')
+	title = 'Number of ' +animal+ ' by temperature'
+	plt.title(title)
 	plt.tight_layout()
 	plt.show()
 

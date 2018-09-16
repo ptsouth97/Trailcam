@@ -54,7 +54,7 @@ def main():
 			plot_data.lunar_plot(df)
 
 		if choice == '2':
-			plot_data.temp_plot(df)
+			plot_data.temp_plot(df, animal)
 
 		if choice == '3':
 			print('Which stand?')
