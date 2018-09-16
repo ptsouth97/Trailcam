@@ -5,6 +5,7 @@ from matplotlib.ticker import ScalarFormatter, FormatStrFormatter
 import pandas as pd
 import seaborn as sns
 import numpy as np
+from sklearn.linear_model import LinearRegression
 
 
 def main():
@@ -103,12 +104,35 @@ def lunar_plot(df):
 def temp_plot(df, animal):
 	''' Plots number of animals photographed vs temperature'''
 	
-	plt.scatter(df['temp'], df[animal])
+	# get the appropriate columns from df and turn into numpy arrays	
+	X = np.array(df['temp']).reshape(-1,1)
+	y = np.array(df[animal]).reshape(-1,1)
+
+	# create the regressor
+	reg = LinearRegression()
+
+	# create the prediction space
+	prediction_space = np.linspace(min(X), max(X)).reshape(-1,1)
+
+	# fit the model to the data
+	reg.fit(X, y)
+
+	# compute predictions over the prediction space
+	y_pred = reg.predict(prediction_space)
+
+	# print R^2
+	score = reg.score(X, y)
+	r2 = 'R^2 = ' + str(score)
+
+	# plot the regression line and raw data points
+	plt.plot(prediction_space, y_pred, color='black', linewidth=3)
+	plt.scatter(X, y)
 	plt.xlabel('Temp (F)')
 	plt.ylabel('Number of photographic observations')
 	plt.gca().ticklabel_format(useOffset=False)
 	title = 'Number of ' +animal+ ' by temperature'
 	plt.title(title)
+	plt.annotate(s=r2, xy=(10,10), xycoords='figure points')
 	plt.tight_layout()
 	plt.show()
 
