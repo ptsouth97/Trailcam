@@ -76,14 +76,20 @@ def show_all(df):
 	plt.show()
 
 
-def plot_all_stands(df):
+def plot_all_stands(df, animal):
 	''' plots total number of observations for each stand'''
 
-	total = df.groupby('stand').hogs.sum()
+	if animal == 'deer':
+		total = df.groupby('stand').deer.sum()
+
+	if animal == 'hogs':
+		total = df.groupby('stand').hogs.sum()
+
 	total.plot(kind='bar', rot=45)
 	plt.xlabel('Stand')
 	plt.ylabel('Total photographic observations')
-	plt.title('Total number of observations by stand')
+	title = 'Total number of ' +animal+ ' observations by stand'
+	plt.title(title)
 	plt.tight_layout()
 	plt.show()
 
@@ -173,22 +179,6 @@ def stand_time_histogram(df, animal, stand):
 	plt.title(title)
 	plt.tight_layout()
 	plt.show()
-
-
-def hogs_stand_plot(df):
-	'''plots the number of hogs seen at each stand'''
-	
-	location = df.groupby('stand').hogs.sum()
-	location.plot(kind='bar', rot=45)
-	plt.xlabel('Stand')
-	plt.ylabel('Number of hogs photographed')
-	plt.title('Number of hogs by stand')
-	plt.tight_layout()
-	plt.show()
-	return
-
-
-
 
 
 if __name__ == '__main__':

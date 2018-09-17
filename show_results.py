@@ -4,6 +4,7 @@ from sqlalchemy import create_engine, MetaData, Table, Column, String, select
 import pandas as pd
 import matplotlib.pyplot as plt
 import plot_data
+from datetime import datetime, timedelta
 
 
 def main():
@@ -23,6 +24,25 @@ def main():
 
 
 	while True:
+		while True:
+			print('CHOICES')
+			print('(1) All data')
+			print('(2) Last X days')
+			range_choice = input('What range do you want to analyze? ').strip()
+			print('')
+
+			if range_choice == '1':
+				break
+
+			if range_choice == '2':
+				days = int(input('How many days back from today do you want to analyze? ').strip())
+				lastXdays = datetime.today() - timedelta(days=days)
+				stmt = stmt.where(game.columns.obs_time > lastXdays)
+				break
+
+			else:
+				print('Enter a valid choice')
+
 		while True:
 			print('CHOICES')
 			print('(0) exit')
@@ -55,6 +75,7 @@ def main():
 			results = result_proxy.fetchall()
 			df = pd.DataFrame(results, columns=columns)
 			df = df.apply(pd.to_numeric, errors='ignore')
+			print(df)
 
 		while True:
 			print('CHOICES:')
@@ -109,8 +130,9 @@ def main():
 				break
 
 			if choice == '4':
-				plot_data.plot_all_stands(df)
+				plot_data.plot_all_stands(df, animal)
 				break
+
 
 			else:
 				print('Please enter a valid choice ')
