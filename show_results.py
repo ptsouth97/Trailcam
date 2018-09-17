@@ -76,7 +76,6 @@ def main():
 			results = result_proxy.fetchall()
 			df = pd.DataFrame(results, columns=columns)
 			df = df.apply(pd.to_numeric, errors='ignore')
-			print(df)
 
 		while True:
 			print('CHOICES:')
