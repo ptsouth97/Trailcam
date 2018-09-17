@@ -32,6 +32,7 @@ def main():
 			print('')
 
 			if range_choice == '1':
+				days = 'ALL'
 				break
 
 			if range_choice == '2':
@@ -130,7 +131,7 @@ def main():
 				break
 
 			if choice == '4':
-				plot_data.plot_all_stands(df, animal)
+				plot_data.plot_all_stands(df, animal, days)
 				break
 
 

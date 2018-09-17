@@ -76,7 +76,7 @@ def show_all(df):
 	plt.show()
 
 
-def plot_all_stands(df, animal):
+def plot_all_stands(df, animal, lastXdays):
 	''' plots total number of observations for each stand'''
 
 	if animal == 'deer':
@@ -88,7 +88,7 @@ def plot_all_stands(df, animal):
 	total.plot(kind='bar', rot=45)
 	plt.xlabel('Stand')
 	plt.ylabel('Total photographic observations')
-	title = 'Total number of ' +animal+ ' observations by stand'
+	title = 'Total number of ' +animal+ ' observations by stand for ' +str(lastXdays)+ ' days'
 	plt.title(title)
 	plt.tight_layout()
 	plt.show()
