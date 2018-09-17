@@ -17,13 +17,13 @@ def main():
 
 	connection = engine.connect()
 
-	stmt = select([game])
-
 	columns = ['obs_time', 'temp', 'moon', 'stand', 'deer', 'bucks', 'does', 'hogs', 'dark', 'day_bucks', 
 				'day_deer', 'day_does', 'day_hogs', 'light']
 
 
 	while True:
+		#reset stmt with each loop
+		stmt = select([game])
 		while True:
 			print('CHOICES')
 			print('(1) All data')
