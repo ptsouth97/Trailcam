@@ -77,6 +77,12 @@ def main():
 			df = pd.DataFrame(results, columns=columns)
 			df = df.apply(pd.to_numeric, errors='ignore')
 
+
+		if df.empty == True:
+			print('The dataframe is empty. Please try another search combination')
+			print('')
+			continue
+			
 		while True:
 			print('CHOICES:')
 			print('(0) exit')
