@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+	{% block body %}
+		<h1>Hogs All Stands Data </h1>
+		<img src={{url_for('static', filename="hogs_all_stands.png")}} alt="Image Placeholder" width "49%"/>
+		<hr>
+		<h3> Enter Number of Days Back You Want to Plot:</h3>
+		<form method='POST'>
+			<input type='text' name='days' />
+			<input type='submit' />
+		</form>
+		<hr>
+		<h3> Last Database Reading: {{ time }} ==> <a href="/hogs_all_stands"class="button">REFRESH</a></h3>	
+		<hr>
+		<h3> <a href="/"class="button">HOME</a></h3>
+		<hr>
+	{% endblock %}
