@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+	{% block body %}
+		<h1>Deer Time Histogram Data </h1>
+		<img src={{url_for('static', filename="filename.png")}} alt="Image Placeholder" width "49%"/>
+		<hr>
+		<form action='' method=post
+			<h3> Enter Number of Days Back You Want to Plot:</h3>
+				<input type='text' name='days'/>
+			<hr>
+			<h3> Stand: </h3>
+			<form action='' method=post>
+				<input type='radio' name='stand' value='ALL' checked> ALL<br>
+				<input type='radio' name='stand' value='OAKGROVE'> Oakgrove<br>
+				<input type='radio' name='stand' value='SWAMP'> Swamp<br>
+				<input type='radio' name='stand' value='HOGSLAYER'> Hogslayer<br>
+				<input type='radio' name='stand' value='CULDESAC'> Culdesac<br>
+				<input type="submit" />
+			</form>
+		<h4> *** Note that if your Days or Stand choice returns an empty dataset, the graph will default to ALL </h4>
+		<hr>
+		<h3> Last Database Reading: {{ time }} ==> <a href="/deer_all_stands"class="button">REFRESH</a></h3>	
+		<hr>
+		<h3> <a href="/"class="button">HOME</a></h3>
+		<hr>
+	{% endblock %}
