@@ -72,13 +72,26 @@ def main():
 			plt.close(fig)
 			os.remove(file)
 			continue
+		
+		while True:
+			try:
+				deer = int(input('How many deer are in the picture? ').strip())
+				break
 
-		deer = int(input('How many deer are in the picture? ').strip())
+			except ValueError:
+				print('Please enter a valid number')
 
 		if deer > 0:
 			df_row.iloc[0][4] = deer
 
-			bucks = int(input('How many bucks are in the picture? ').strip())
+			while True:
+				try:
+					bucks = int(input('How many bucks are in the picture? ').strip())
+					break
+
+				except ValueError:
+					print('Please enter a valid number')
+
 			if bucks > 0:
 				df_row.iloc[0][5] = bucks
 
@@ -88,7 +101,14 @@ def main():
 				df_row.iloc[0][6] = does
 
 		else:
-			hogs = int(input('How many hogs are in the picture? ').strip())
+			while True:
+				try:
+					hogs = int(input('How many hogs are in the picture? ').strip())
+					break
+				
+				except ValueError:
+					print('Please enter a valid number')
+
 			df_row.iloc[0][7] = hogs
 
 		# Close the image
@@ -126,14 +146,6 @@ def main():
 
 			updated_df = almanac_info.get_sun_data_from_web(df)
 			updated_df.to_csv(name, index=False)
-			# print('FINAL DF')
-			# print(updated_df)
-			# print('')
-
-			# plot_data.lunar_plot(updated_df)
-			# plot_data.temp_plot(updated_df)
-			# plot_data.stand_plot(updated_df)	
-			# plot_data.hogs_stand_plot(updated_df)
 
 			# Option to add the dataframe (stored in .csv file) to the SQLite database
 			add_to_sql = input('Do you want to add this dataframe to the SQLite database? [1]=Yes, [any other key]=No ').strip()
