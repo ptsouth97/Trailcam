@@ -138,6 +138,24 @@ def hogs_lunar_plot():
 	return render_template('hogs_lunar_plot.html', **templateData)
 
 
+@app.route('/hogs_days_plot', methods=['GET', 'POST'])
+def hogs_days_plot():
+	''' page for plotting hogs observations by day'''
+ 
+	days = request.form.get('days', 'ALL')
+	stand = request.form.get('stand', 'ALL')
+ 
+	print('Stand = ' +stand)
+	print('Days = ' +days)
+	animal = 'hogs'
+
+	time, df, num_days = web_get_data.all_stands(animal, days)
+	web_plot_data.days_plot(df, animal, num_days, stand)
+	templateData = {'time': time}
+
+	return render_template('hogs_days_plot.html', **templateData)
+
+
 @app.context_processor
 def override_url_for():
 	"""

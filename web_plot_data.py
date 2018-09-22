@@ -81,6 +81,7 @@ def lunar_plot(df, animal, num_days, stand):
 
 	return
 
+
 def temp_plot(df, animal):
 	''' Plots number of animals photographed vs temperature'''
 	
@@ -157,6 +158,7 @@ def stand_time_histogram(df, animal, days, stand):
 	grouped_hours = datetimes.groupby('time_hour')
 	animals_by_hour = grouped_hours[animal].sum()
 	animals_by_hour.plot(kind='bar', rot=45)
+	print(animals_by_hour)
 	title = stand+ ': Number of ' +animal+ ' observed by hour for ' +str(days)+ ' days'
 	plt.xlabel('Hour')
 	plt.ylabel('Number of observations')
@@ -164,6 +166,43 @@ def stand_time_histogram(df, animal, days, stand):
 	plt.tight_layout()
 	os.chdir('/home/pi/Documents/Trailcam/static')
 	plt.savefig('filename.png')
+	plt.close()
+	os.chdir('/home/pi/Documents/Trailcam')
+
+	return
+
+def days_plot(df, animal, days, stand):
+	''' plots number of observations by day'''
+
+	while True:
+		df_stand = df
+		if stand != 'ALL':
+			df_stand = df[(df['stand'] == stand)]
+		if df_stand.empty == True:
+			stand = 'ALL'
+			continue
+		break
+
+ 
+	df_animal = df_stand[(df_stand[animal] > 0)]
+	datetimes = df_animal.loc[:, ['obs_time', animal]]
+	dt_list = datetimes['obs_time'].apply(lambda x: x.split(' '))
+	times = dt_list.apply(lambda x: x.pop(0))
+	data = times.apply(lambda x: pd.to_datetime(x, format='%Y-%m-%d'))
+	days = data.apply(lambda x: x.day)
+	days_column = pd.Series(days)
+	datetimes['time_day'] = days_column.values
+	grouped_days = datetimes.groupby('time_day')
+	animals_by_day = grouped_days[animal].sum()
+	print(animals_by_day)
+	animals_by_day.plot(kind='bar', rot=45)
+	title = stand+ ': Number of ' +animal+ ' observed by day for ' +str(days)+ ' days'
+	plt.xlabel('Day')
+	plt.ylabel('Number of observations')
+	plt.title(title)
+	plt.tight_layout()
+	os.chdir('/home/pi/Documents/Trailcam/static')
+	plt.savefig('byday.png')
 	plt.close()
 	os.chdir('/home/pi/Documents/Trailcam')
 
