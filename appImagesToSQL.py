@@ -141,6 +141,10 @@ def main():
 		# print(df)
 		# print('')
 
+		# drop duplicate entries
+		df.drop_duplicates(subset='obs_time', inplace=True)
+		df = df.reset_index(drop=True)		
+
 		# If dataframe is not empty, get more information then plot data
 		if df.empty == False:
 
