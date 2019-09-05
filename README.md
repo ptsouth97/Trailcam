@@ -28,3 +28,6 @@ The application was tested using Python 3.5 running on Ubuntu and relies on:
 
 ## Future plans
 * Implementing a machine learning algorithm to automatically identify animals in the pictures
+
+## Web app
+The web app takes the trailcam information from the SQL database and displays it on a webpage
